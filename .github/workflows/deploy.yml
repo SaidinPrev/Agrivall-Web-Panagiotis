@@ -1,0 +1,26 @@
+name: Deploy Laravel Sail (Remote)
+on:
+  push:
+    branches: ["main", "panagiotis"]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy (Remote) por SSH con Sail
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{secrets.IP}}
+          username: ${{secrets.USER_NAME}}
+          password: ${{secrets.PASSWORD}}
+          script: |
+            set -e
+            cd /home/panos/development/laravel/Agrivall-Web-Panagiotis
+            git pull
+            ./vendor/bin/sail down
+            ./vendor/bin/sail up -d --build
+
+            until ./vendor/bin/sail exec -T mysql mysqladmin ping -h"mysql" --silent; do
+              echo "Waiting for MySQL..."
+              sleep 2
+            done
+            ./vendor/bin/sail artisan migrate --force
