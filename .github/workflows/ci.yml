@@ -6,9 +6,7 @@ on:
       - main
       - panagiotis
       - feature/**
-      - bugfix/**
-      - hotfix/**
-      - chore/**
+      - fix/**
       - release/**
   pull_request:
     branches:
