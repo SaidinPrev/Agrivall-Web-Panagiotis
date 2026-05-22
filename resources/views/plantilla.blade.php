@@ -8,13 +8,12 @@
     <title>@yield('titulo')</title>
     <!-- Bootstrap 5 CSS -->
     
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/bootstrap.js'])
 </head>
 
 <body>
-    
+    @include('partials.headerNav')
     <main>
-        @include('partials.headerNav')
         @yield('contenido')
     </main>
 
