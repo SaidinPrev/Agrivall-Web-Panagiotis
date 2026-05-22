@@ -2,8 +2,9 @@
 @section('titulo', 'AgriVall')
 @section('contenido')
 
+    @include('partials.hero')
 
-    <section id="hero">
+    {{-- <section id="hero">
         <h1>El sabor auténtico de nuestra tierra</h1>
         <p>Agricultura ecológica, cosecha responsable y sabor auténtico desde el corazón de la Vall de la Gallinera.</p>
         <img src="{{ 'imgs/cerezos-vall-gallinera-1024x512.jpg' }}" alt="Arboles de cerezos"><br>
@@ -109,8 +110,7 @@
         <a href="">Política de Cookies</a>
         <a href="">Política de Privacidad</a>
         <img src="imgs/caecv.png" alt="caecv">
-    </div>
+    </div> --}}
 
 
-    </div>
 @endsection
