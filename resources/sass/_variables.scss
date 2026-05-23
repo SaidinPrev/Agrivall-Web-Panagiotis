@@ -9,3 +9,37 @@ $title-font: "Arimo", sans-serif;
 
 //Colors
 $title-colour: #9d6042;
+$color-cream: #faf1f6;
+$color-white: #ffffff;
+$color-green-soft: #49673f1f;
+$color-green-overlay: #49673f5d;
+$color-burgundy: #5c0d18;
+$color-burgundy-dark: #7b1626;
+$color-cream-glass: #faf1f6e3;
+$color-cream-border: rgba(250, 241, 246, 0.7);
+$shadow-burgundy: rgba(92, 13, 24, 0.24);
+
+// Typography scale
+$font-size-section-title: 2rem;
+$font-size-subsection-title: 1.5rem;
+$font-size-body-lg: 1.1rem;
+$font-size-hero-title: 1.6rem;
+
+// Layout and spacing
+$section-full-height: 100vh;
+$space-section-padding: 2rem;
+$space-card-padding: 1.5rem;
+$space-heading-gap: 0.75rem;
+$space-content-gap: 1rem;
+$hero-text-offset: 56px;
+
+// Components
+$navbar-logo-height: 65px;
+$navbar-toggle-size: 50px;
+$mobile-drawer-width: 215px;
+$radius-pill: 999px;
+
+// Motion
+$transition-fast: 0.1s ease;
+$transition-base: 0.3s ease;
+$transition-slow: 0.5s ease-in-out;
