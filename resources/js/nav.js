@@ -1,20 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const button = document.querySelector('.navbar-toggler');
+    const menuButton = document.querySelector('.site-nav__toggle');
     const navOverlay = document.querySelector('.nav-overlay');
-    const navbarCollapse = document.querySelector('.navbar-collapse');
+    const navPanel = document.querySelector('.site-nav__panel');
+    const dropdownItem = document.querySelector('.site-nav__item--dropdown');
+    const dropdownButton = document.querySelector('.site-nav__dropdown-toggle');
 
-    if (!button || !navOverlay || !navbarCollapse) {
+    if (!menuButton || !navOverlay || !navPanel) {
         return;
     }
 
-    button.addEventListener('click', () => {
-        navOverlay.classList.toggle('active');
-    });
+    const closeMenu = () => {
+        navOverlay.classList.remove('active');
+        navPanel.classList.remove('is-open');
+        menuButton.setAttribute('aria-expanded', 'false');
+    };
+
+    const toggleMenu = () => {
+        const isOpen = navPanel.classList.toggle('is-open');
+        navOverlay.classList.toggle('active', isOpen);
+        menuButton.setAttribute('aria-expanded', String(isOpen));
+    };
+
+    menuButton.addEventListener('click', toggleMenu);
 
     navOverlay.addEventListener('click', (event) => {
         if (event.target === navOverlay) {
-            navOverlay.classList.remove('active');
-            navbarCollapse.classList.remove('show');
+            closeMenu();
+        }
+    });
+
+    if (dropdownItem && dropdownButton) {
+        const closeDropdown = () => {
+            dropdownItem.classList.remove('is-open');
+            dropdownButton.setAttribute('aria-expanded', 'false');
+        };
+
+        dropdownButton.addEventListener('click', () => {
+            const isOpen = dropdownItem.classList.toggle('is-open');
+            dropdownButton.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!dropdownItem.contains(event.target)) {
+                closeDropdown();
+            }
+        });
+
+        navOverlay.addEventListener('click', closeDropdown);
+    }
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 992) {
+            closeMenu();
         }
     });
 });

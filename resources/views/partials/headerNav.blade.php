@@ -1,33 +1,35 @@
 <header>
-  <nav class="navbar navbar-expand-lg ">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+  <nav class="site-nav" aria-label="Navegación principal">
+    <div class="site-nav__inner">
+      <a class="site-nav__brand" href="#">
         <img src="{{ asset('imgs/logo.png') }}" alt="Agrivall logo">
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <button class="site-nav__toggle" type="button" aria-controls="site-nav-panel" aria-expanded="false" aria-label="Abrir menú">
+        <span class="site-nav__toggle-line"></span>
+        <span class="site-nav__toggle-line"></span>
+        <span class="site-nav__toggle-line"></span>
       </button>
       <div class="nav-overlay"></div>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link"  href="#">Inicio</a>
+      <div class="site-nav__panel" id="site-nav-panel">
+        <ul class="site-nav__list">
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="#">Inicio</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Productos</a>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="#">Productos</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">La Casilla</a>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="#">La Casilla</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Nuestro Blog</a>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="#">Nuestro Blog</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-globe"></i>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Valencià</a></li>
+          <li class="site-nav__item site-nav__item--dropdown">
+            <button class="site-nav__link site-nav__dropdown-toggle" type="button" aria-expanded="false" aria-controls="site-nav-language-menu">
+              <i class="bi bi-globe"></i>
+            </button>
+            <ul class="site-nav__dropdown" id="site-nav-language-menu">
+              <li><a class="site-nav__dropdown-link" href="#">Valencià</a></li>
             </ul>
           </li>
         </ul>

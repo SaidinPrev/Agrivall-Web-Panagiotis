@@ -4,6 +4,8 @@
 
     @include('partials.hero')
     @include('partials.about')
+    @include('partials.products')
+    @include('partials.casilla')
 
     {{-- <section id="hero">
         <h1>El sabor auténtico de nuestra tierra</h1>

@@ -1,4 +1,4 @@
-<section class="container-fluid px-0" id="hero">
+<section id="hero">
     <div class="hero-image">
         <img src="{{ asset('imgs/cherryFlowersDark.jpg') }}" alt="Fruta ecológica">
     </div>
