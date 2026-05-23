@@ -3,6 +3,7 @@
 @section('contenido')
 
     @include('partials.hero')
+    @include('partials.about')
 
     {{-- <section id="hero">
         <h1>El sabor auténtico de nuestra tierra</h1>
