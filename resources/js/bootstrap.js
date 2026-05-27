@@ -1,8 +1,4 @@
-import './nav';
-import './about';
-import './products';
-import './casilla';
-import './back-to-top';
+import 'bootstrap';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
