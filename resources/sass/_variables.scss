@@ -11,7 +11,11 @@ $title-font: "Arimo", sans-serif;
 $title-colour: #9d6042;
 $color-cream: #faf1f6;
 $color-white: #ffffff;
-$color-green-soft: rgba(73, 103, 63, 0.122);
+$color-ivory-soft: #fbf8f3;
+$color-sand-soft: #efe6dc;
+$color-panel-warm: rgba(255, 251, 246, 0.94);
+$color-green: rgb(73, 103, 63);
+$color-green-soft: rgba(73, 103, 63, 0.089);
 $color-green-overlay: #49673f5d;
 $color-burgundy: rgb(92, 13, 24);
 $color-burgundy-dark: #7b1626;
@@ -23,7 +27,12 @@ $shadow-burgundy: rgba(92, 13, 24, 0.24);
 $font-size-section-title: 2rem;
 $font-size-subsection-title: 1.5rem;
 $font-size-body-lg: 1.1rem;
-$font-size-hero-title: 1.6rem;
+$font-size-root-mobile: clamp(15px, 14.7px + 0.2vw, 16px);
+$font-size-root-tablet: clamp(16px, 15.7px + 0.08vw, 17px);
+$font-size-root-desktop: clamp(16px, 1rem + 0.15vw, 18px);
+$font-size-hero-title-mobile: calc(#{$font-size-root-mobile} * 1.5);
+$font-size-hero-title-tablet: calc(#{$font-size-root-tablet} * 1.5);
+$font-size-hero-title-desktop: calc(#{$font-size-root-desktop} * 3);
 
 // Layout and spacing
 $section-full-height: 100vh;

@@ -4,14 +4,16 @@
     </div>
 
     <div class="about-overlay">
-        <div class="about-content about-reveal">
-            <h2>Cultivamos con respeto por la tierra</h2>
-            <p>
-                En <strong>AgriVall</strong> somos una empresa familiar dedicada al cultivo
-                ecológico. Desde 1994 trabajamos con calma, cuidando cada fruto desde el origen para ofrecer un producto
-                cercano,
-                honesto y lleno de sabor.
-            </p>
+        <div class="about-shell">
+            <div class="about-content about-reveal">
+                <h2>Cultivamos con respeto por la tierra</h2>
+                <p>
+                    En <strong>AgriVall</strong> somos una empresa familiar dedicada al cultivo
+                    ecológico. Desde 1994 trabajamos con calma, cuidando cada fruto desde el origen para ofrecer un producto
+                    cercano,
+                    honesto y lleno de sabor.
+                </p>
+            </div>
         </div>
     </div>
 </section>
@@ -21,7 +23,7 @@
     </div>
     <div class="vision-mission-overlay">
         <div class="vision-mission-shell">
-            <div class="vision-mission-stack">
+            <div class="vision-mission-content">
                 <article class="pillar-card pillar-reveal">
                     <h3>Nuestra visión</h3>
                     <p>

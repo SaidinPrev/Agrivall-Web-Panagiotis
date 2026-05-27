@@ -1,13 +1,15 @@
 <section id="hero">
-    <div class="hero-image">
+    <div class="hero-media">
         <img src="{{ asset('imgs/cherryFlowersDark.jpg') }}" alt="Fruta ecológica">
     </div>
 
-    <div class="hero-description mano">
-        <h1>Fruta ecológica</h1>
-        <div class="hero-bottom">
-            <h6>Cosechada con cariño y respeto</h6>
-            <a href="#productos" class="hero-btn">Ver productos</a>
+    <div class="hero-overlay">
+        <div class="hero-shell">
+            <div class="hero-content">
+                <h1>Fruta ecológica</h1>
+                <p class="hero-subtitle">Cosechada con cariño y respeto</p>
+                <a href="#productos" class="hero-btn">Ver productos</a>
+            </div>
         </div>
     </div>
 </section>

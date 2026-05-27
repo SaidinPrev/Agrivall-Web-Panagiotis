@@ -10,7 +10,7 @@
                 Un espacio pensado para descansar y reconectar con el entorno. Reserva y disfruta con calma los paisajes de la Vall de la
                 Gallinera.
             </p>
-            <a href="#" class="casilla__link">Reservar</a>
+            <a href="#" class="casilla__link">Ver disponibilidad</a>
         </div>
     </div>
 </section>
