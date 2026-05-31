@@ -1,3 +1,5 @@
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
 section.admin-page {
   min-height: 100vh;
   padding: 8rem 0 4rem;
@@ -5,6 +7,56 @@ section.admin-page {
     radial-gradient(circle at top left, rgba($color-green, 0.13), transparent 32rem),
     $color-green-soft;
   color: $color-burgundy;
+
+  .admin-hero,
+  .admin-card {
+    border-radius: 1.35rem;
+  }
+
+  .admin-hero {
+    overflow: hidden;
+    background:
+      linear-gradient(135deg, rgba($color-white, 0.96), rgba($color-cream, 0.82)),
+      radial-gradient(circle at top right, rgba($color-green, 0.16), transparent 18rem);
+
+    h1 {
+      color: $title-colour;
+      font-family: $title-font;
+    }
+  }
+
+  .admin-hero__metric {
+    min-width: 10rem;
+    padding: 1rem 1.15rem;
+    border-radius: 1.1rem;
+    background: rgba($color-green, 0.1);
+    color: $color-green;
+    text-align: left;
+
+    strong {
+      display: block;
+      font-size: clamp(1.8rem, 1.35rem + 1.5vw, 2.6rem);
+      line-height: 1;
+    }
+  }
+
+  .admin-card {
+    overflow: hidden;
+  }
+
+  .admin-table {
+    th {
+      color: rgba($color-burgundy, 0.68);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    td,
+    th {
+      padding: 1rem;
+    }
+  }
 
   .admin-page__header {
     display: grid;
