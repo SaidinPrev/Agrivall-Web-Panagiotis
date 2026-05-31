@@ -16,7 +16,7 @@
                     <div class="product-card__body">
                         <h3>Cerezas</h3>
                         <p>Fruta delicada y de temporada, recolectada con cuidado para conservar todo su sabor.</p>
-                        <a href="#" class="product-card__link">Comprar</a>
+                        <a href="{{ route('shop.index', ['producto' => 'Cereza']) }}" class="product-card__link">Comprar</a>
                     </div>
                 </div>
             </article>
@@ -28,7 +28,7 @@
                         <h3>Nueces</h3>
                         <p>Un fruto lleno de matices, cultivado con paciencia y respeto por el ritmo natural del campo.
                         </p>
-                        <a href="#" class="product-card__link">Comprar</a>
+                        <a href="{{ route('shop.index', ['producto' => 'Nuez']) }}" class="product-card__link">Comprar</a>
                     </div>
                 </div>
             </article>
@@ -39,7 +39,7 @@
                     <div class="product-card__body">
                         <h3>Albaricoques</h3>
                         <p>Dulces, aromáticos y llenos de luz, cosechados en su mejor momento de maduración.</p>
-                        <a href="#" class="product-card__link">Comprar</a>
+                        <a href="{{ route('shop.index', ['producto' => 'Albaricoque']) }}" class="product-card__link">Comprar</a>
                     </div>
                 </div>
             </article>
@@ -51,7 +51,7 @@
                         <h3>Hierbas comestibles</h3>
                         <p>Variedades frescas y llenas de carácter para quienes buscan sabor y proximidad en su cocina.
                         </p>
-                        <a href="#" class="product-card__link">Comprar</a>
+                        <a href="{{ route('shop.index', ['producto' => 'hierbas']) }}" class="product-card__link">Consultar</a>
                     </div>
                 </div>
             </article>

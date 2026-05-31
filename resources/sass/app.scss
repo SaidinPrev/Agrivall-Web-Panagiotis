@@ -7,6 +7,9 @@
 
 // Variables
 @import 'variables';
+@import 'shop';
+@import 'checkout';
+@import 'admin';
 
 html {
   font-size: $font-size-root-mobile;
@@ -91,6 +94,44 @@ button {
   }
 
 
+}
+
+.flash-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.45);
+
+  .flash-modal__card {
+    width: min(100%, 28rem);
+    padding: 2rem;
+    border-radius: 1.25rem;
+    background: $color-panel-warm;
+    color: $color-burgundy;
+    text-align: center;
+    box-shadow: 0 24px 70px rgba(92, 13, 24, 0.28);
+  }
+
+  button {
+    margin-top: 1rem;
+    padding: 0.8rem 1.3rem;
+    border: 0;
+    border-radius: $radius-pill;
+    background: $color-green;
+    color: $color-cream;
+    cursor: pointer;
+
+    transition: opacity $transition-base, transform $transition-base;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.85;
+      transform: translateY(-2px);
+    }
+  }
 }
 
 img {
