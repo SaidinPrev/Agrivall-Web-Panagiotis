@@ -1,0 +1,297 @@
+section#shop-page {
+    padding: 8rem 0 4rem;
+    background-color: $color-green-soft;
+
+    .shop-page__intro {
+        display: grid;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+
+        h1 {
+            margin: 0;
+            font-family: $title-font;
+            color: $title-colour;
+            font-size: clamp(2.4rem, 1.8rem + 3vw, 4rem);
+            line-height: 0.95;
+        }
+
+        p {
+            margin: 0;
+            max-width: 42rem;
+            color: $color-burgundy;
+        }
+    }
+
+    .shop-page__kicker {
+        width: fit-content;
+        padding: 0.35rem 0.85rem;
+        border-radius: $radius-pill;
+        background: $color-cream;
+        color: $color-green;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    .shop-page__layout {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .shop-page__cart {
+        padding: 1.5rem;
+        border: 1px solid rgba($color-burgundy, 0.1);
+        border-radius: 1.5rem;
+        background: $color-panel-warm;
+        box-shadow: 0 1.25rem 3rem rgba($color-burgundy, 0.12);
+    }
+
+    .shop-page__catalog {
+        overflow: hidden;
+        border-radius: 1.5rem;
+        box-shadow: 0 1.25rem 3rem rgba($color-burgundy, 0.12);
+    }
+
+    .shop-configurator {
+        display: grid;
+        gap: 1rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba($color-burgundy, 0.12);
+
+        h2 {
+            margin: 0;
+            color: $title-colour;
+            font-family: $title-font;
+        }
+    }
+
+    .shop-configurator__field {
+        display: grid;
+        gap: 0.45rem;
+        color: $color-burgundy;
+        font-weight: 700;
+
+        select,
+        input,
+        textarea {
+            box-sizing: border-box;
+            width: 100%;
+            border: 1px solid rgba($color-green, 0.22);
+            border-radius: 0.9rem;
+            padding: 0.85rem 1rem;
+            background: $color-white;
+            color: $color-burgundy;
+            font: inherit;
+        }
+
+        select:focus,
+        input:focus,
+        textarea:focus {
+            outline: 2px solid rgba($color-green, 0.25);
+            border-color: rgba($color-green, 0.5);
+        }
+
+        textarea {
+            min-height: 9rem;
+            resize: vertical;
+        }
+    }
+
+    .shop-product-preview__card {
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        min-height: 22rem;
+        border-radius: 1.5rem;
+        background: linear-gradient(145deg, rgba($color-green, 0.28), rgba($color-burgundy, 0.16));
+    }
+
+    .shop-product-preview__image {
+        width: 100%;
+        height: 100%;
+        min-height: 22rem;
+        object-fit: cover;
+        display: block;
+    }
+
+    .shop-product-summary {
+        display: grid;
+        gap: 0.35rem;
+        padding-bottom: 0.5rem;
+
+        h3,
+        p {
+            margin: 0;
+        }
+
+        h3 {
+            color: $title-colour;
+            font-family: $title-font;
+        }
+
+        p {
+            color: $color-burgundy;
+        }
+    }
+
+    .shop-product-summary__price {
+        width: fit-content;
+        padding: 0.35rem 0.85rem;
+        border-radius: $radius-pill;
+        background: rgba($color-green, 0.12);
+        color: $color-green;
+        font-weight: 900;
+    }
+
+    .shop-product-summary__availability {
+        width: fit-content;
+        padding: 0.35rem 0.85rem;
+        border-radius: $radius-pill;
+        font-weight: 900;
+
+        &.is-available {
+            background: rgba($color-green, 0.14);
+            color: $color-green;
+        }
+
+        &.is-unavailable {
+            background: rgba($color-burgundy, 0.12);
+            color: $color-burgundy;
+        }
+    }
+
+    .shop-configurator__submit {
+        width: 100%;
+        border: 0;
+        border-radius: $radius-pill;
+        padding: 0.9rem 1.2rem;
+        background: $color-green;
+        color: $color-cream;
+        font-weight: 800;
+        cursor: pointer;
+        transition: opacity $transition-base, transform $transition-base;
+
+        &:hover,
+        &:focus-visible {
+            opacity: 0.86;
+            transform: translateY(-2px);
+        }
+    }
+
+    .shop-configurator__feedback {
+        min-height: 1.4rem;
+        margin: 0;
+        color: $color-burgundy;
+        font-weight: 700;
+    }
+
+    .shop-page__cart {
+        display: grid;
+        gap: 1.5rem;
+
+        h2 {
+            margin: 0 0 1rem;
+            color: $title-colour;
+            font-family: $title-font;
+        }
+
+        p {
+            margin: 0;
+            color: $color-burgundy;
+        }
+    }
+
+    .shop-cart__items {
+        display: grid;
+        gap: 0.75rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .shop-cart__item {
+        display: grid;
+        gap: 0.75rem;
+        padding: 0.9rem;
+        border-radius: 1rem;
+        background: $color-white;
+        color: $color-burgundy;
+        font-weight: 700;
+    }
+
+    .shop-cart__remove {
+        width: fit-content;
+        border: 0;
+        border-radius: $radius-pill;
+        padding: 0.45rem 0.85rem;
+        background: rgba($color-burgundy, 0.08);
+        color: $color-burgundy;
+        font-weight: 800;
+        cursor: pointer;
+    }
+
+    .shop-cart__total {
+        margin-top: 1rem;
+        font-weight: 900;
+    }
+
+    .shop-cart__checkout {
+        width: 100%;
+        margin-top: 1rem;
+        border: 0;
+        border-radius: $radius-pill;
+        padding: 0.9rem 1.2rem;
+        background: $color-burgundy;
+        color: $color-cream;
+        font-weight: 900;
+        cursor: pointer;
+    }
+
+    .shop-herb-form {
+        display: grid;
+        gap: 1rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba($color-burgundy, 0.12);
+
+        h2 {
+            margin: 0;
+            color: $title-colour;
+            font-family: $title-font;
+        }
+
+        p {
+            margin: 0;
+            color: rgba($color-burgundy, 0.78);
+        }
+    }
+
+    .shop-herb-note {
+        h2 {
+            margin-bottom: 0.75rem;
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    section#shop-page {
+        .shop-page__layout {
+            grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.65fr);
+            align-items: start;
+        }
+
+        .shop-product-preview__card,
+        .shop-product-preview__image {
+            min-height: 38rem;
+        }
+
+        .shop-page__cart {
+            position: sticky;
+            top: 7rem;
+        }
+
+        .shop-cart__item {
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
+        }
+    }
+}
