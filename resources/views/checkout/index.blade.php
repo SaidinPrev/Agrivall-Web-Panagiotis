@@ -13,9 +13,9 @@
                     <h2>Datos del cliente</h2>
                     <form action="{{ route('checkout.store') }}" method="POST" class="checkout-form">
                         @csrf
-                        <div class="row">
-                            <div class="column">
-                                <h3 class="title">Pago</h3>
+                        <div class="checkout-form__row">
+                            <div class="checkout-form__column">
+                                <h3 class="checkout-form__title">Pago</h3>
 
                                 <div class="payment-methods" aria-label="Métodos de pago">
                                     <label class="payment-method">
@@ -43,8 +43,8 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="column">
-                                <h3 class="title">Dirección de envío</h3>
+                            <div class="checkout-form__column">
+                                <h3 class="checkout-form__title">Dirección de envío</h3>
                                 <div class="input-box">
                                     <span>Nombre y Apellidos</span>
                                     <input type="text" name="nombre_cliente" placeholder="Fernando Pellicer Rocher">
@@ -65,7 +65,7 @@
                                     <span>Población :</span>
                                     <input type="text" placeholder="Alicante">
                                 </div>
-                                <div class="flex">
+                                <div class="checkout-form__split">
                                     <div class="input-box">
                                         <span>Provincia :</span>
                                         <input type="text" placeholder="Valencia">
@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn">Confirmar pedido</button>
+                        <button type="submit" class="checkout-form__submit">Confirmar pedido</button>
                     </form>
                 </section>
                 <aside class="checkout-summary-card">

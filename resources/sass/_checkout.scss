@@ -38,19 +38,19 @@ section#checkout-page {
         display: grid;
         gap: 1.5rem;
 
-        .row {
+        .checkout-form__row {
             display: grid;
             gap: 1.25rem;
             align-items: start;
         }
 
-        .column {
+        .checkout-form__column {
             display: grid;
             gap: 1rem;
             align-content: start;
         }
 
-        .title {
+        .checkout-form__title {
             margin: 0;
             color: $color-burgundy;
             font-size: 1.1rem;
@@ -58,7 +58,7 @@ section#checkout-page {
             letter-spacing: 0.04em;
         }
 
-        .flex {
+        .checkout-form__split {
             display: grid;
             gap: 1rem;
         }
@@ -143,7 +143,7 @@ section#checkout-page {
         background: $color-ivory-soft;
     }
 
-    .btn {
+    .checkout-form__submit {
         width: 100%;
         border: 0;
         border-radius: $radius-pill;
@@ -193,7 +193,7 @@ section#checkout-page {
 @media screen and (min-width: 768px) {
     section#checkout-page {
         .checkout-form {
-            .flex {
+            .checkout-form__split {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
@@ -208,7 +208,7 @@ section#checkout-page {
         }
 
         .checkout-form {
-            .row {
+            .checkout-form__row {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }

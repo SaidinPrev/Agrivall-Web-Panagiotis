@@ -156,6 +156,29 @@ section.admin-page {
     font-size: 0.78rem;
   }
 
+  .admin-status--button {
+    border: 0;
+    border-radius: $radius-pill;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 800;
+  }
+
+  .admin-status--pre-reserva {
+    background: rgba(214, 145, 42, 0.14);
+    color: #9b5b00;
+  }
+
+  .admin-status--reservado {
+    background: rgba(44, 106, 168, 0.14);
+    color: #22507f;
+  }
+
+  .admin-status--no-disponible {
+    background: rgba($color-burgundy, 0.12);
+    color: $color-burgundy;
+  }
+
   .admin-status--large {
     margin: 0 0 1rem;
     padding: 0.55rem 0.9rem;
@@ -205,6 +228,68 @@ section.admin-page {
 
   .admin-button--danger {
     background: $color-burgundy-dark;
+  }
+
+  .admin-inline-price {
+    min-width: 10rem;
+  }
+
+  .admin-inline-price__display {
+    color: $color-burgundy;
+  }
+
+  .admin-inline-price__editor {
+    min-width: 13rem;
+  }
+
+  .admin-status-dialog {
+    width: min(100%, 28rem);
+    padding: 0;
+    border: 0;
+    border-radius: 1.25rem;
+    box-shadow: 0 1.25rem 3rem rgba($color-burgundy, 0.18);
+
+    &::backdrop {
+      background: rgba($color-burgundy, 0.24);
+      backdrop-filter: blur(2px);
+    }
+  }
+
+  .admin-status-dialog__header,
+  .admin-status-dialog__form {
+    padding: 1.25rem;
+  }
+
+  .admin-status-dialog__header {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid rgba($color-burgundy, 0.08);
+
+    p {
+      margin: 0.25rem 0 0;
+      color: rgba($color-burgundy, 0.72);
+    }
+  }
+
+  .admin-status-dialog__close {
+    border: 0;
+    background: transparent;
+    color: $color-burgundy;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+
+  .admin-status-dialog__form {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .admin-status-dialog__actions {
+    display: flex;
+    justify-content: end;
+    gap: 0.75rem;
   }
 
   .admin-back-link {

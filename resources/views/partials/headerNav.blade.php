@@ -18,10 +18,10 @@
                         <a class="site-nav__link" href="{{ route('shop.index') }}">Productos</a>
                     </li>
                     <li class="site-nav__item">
-                        <a class="site-nav__link" href="{{ route('home') }}#casilla">La Casilla</a>
+                        <a class="site-nav__link" href="{{ route('casilla.index') }}">La Casilla</a>
                     </li>
                     <li class="site-nav__item">
-                        <a class="site-nav__link" href="{{ route('home') }}#blog">Nuestro Blog</a>
+                        <a class="site-nav__link" href="{{ route('blog.index') }}">Nuestro Blog</a>
                     </li>
                     <li class="site-nav__item">
                         <a class="site-nav__link" href="{{ route('home') }}#contacto">Contacto</a>

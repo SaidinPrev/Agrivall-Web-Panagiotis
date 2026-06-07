@@ -2,9 +2,11 @@ import './nav';
 import './about';
 import './products';
 import './casilla';
+import './casilla-calendar';
 import './back-to-top';
 import './shop';
 import './flash-modal';
+import './admin-semanas-casilla';
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

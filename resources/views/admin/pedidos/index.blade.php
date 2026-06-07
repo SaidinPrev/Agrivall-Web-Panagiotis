@@ -2,6 +2,10 @@
 
 @section('titulo', 'Pedidos | Admin AgriVall')
 
+@push('styles')
+    @vite('resources/sass/admin.scss')
+@endpush
+
 @section('contenido')
     <section class="admin-page py-5">
         <div class="container mt-5">
