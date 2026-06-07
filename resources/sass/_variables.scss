@@ -2,53 +2,6 @@
 $body-bg: #f8fafc;
 
 // Typography
-$font-family-sans-serif: 'Raleway', sans-serif;
+$font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
-$title-font: "Arimo", sans-serif;
-
-//Colors
-$title-colour: #9d6042;
-$color-cream: #faf1f6;
-$color-white: #ffffff;
-$color-ivory-soft: #fbf8f3;
-$color-sand-soft: #efe6dc;
-$color-panel-warm: rgba(255, 251, 246, 0.94);
-$color-green: rgb(73, 103, 63);
-$color-green-soft: rgba(73, 103, 63, 0.089);
-$color-green-overlay: #49673f5d;
-$color-burgundy: rgb(92, 13, 24);
-$color-burgundy-dark: #7b1626;
-$color-cream-glass: #faf1f6e3;
-$color-cream-border: rgba(250, 241, 246, 0.7);
-$shadow-burgundy: rgba(92, 13, 24, 0.24);
-
-// Typography scale
-$font-size-section-title: 2rem;
-$font-size-subsection-title: 1.5rem;
-$font-size-body-lg: 1.1rem;
-$font-size-root-mobile: clamp(15px, 14.7px + 0.2vw, 16px);
-$font-size-root-tablet: clamp(16px, 15.7px + 0.08vw, 17px);
-$font-size-root-desktop: clamp(16px, 1rem + 0.15vw, 18px);
-$font-size-hero-title-mobile: calc(#{$font-size-root-mobile} * 1.5);
-$font-size-hero-title-tablet: calc(#{$font-size-root-tablet} * 1.5);
-$font-size-hero-title-desktop: calc(#{$font-size-root-desktop} * 3);
-
-// Layout and spacing
-$section-full-height: 100vh;
-$space-section-padding: 2rem;
-$space-card-padding: 1.5rem;
-$space-heading-gap: 0.75rem;
-$space-content-gap: 1rem;
-$hero-text-offset: 56px;
-
-// Components
-$navbar-logo-height: 65px;
-$navbar-toggle-size: 50px;
-$mobile-drawer-width: 215px;
-$radius-pill: 999px;
-
-// Motion
-$transition-fast: 0.1s ease;
-$transition-base: 0.3s ease;
-$transition-slow: 0.5s ease-in-out;
