@@ -39,6 +39,7 @@
                 'feedback_invalid_quantity' => __('site.shop.feedback_invalid_quantity'),
                 'feedback_no_stock' => __('site.shop.feedback_no_stock'),
                 'feedback_added' => __('site.shop.feedback_added'),
+                'feedback_update_error' => __('site.shop.feedback_update_error'),
                 'product_names' => trans('site.products.product_names'),
             ],
         ];

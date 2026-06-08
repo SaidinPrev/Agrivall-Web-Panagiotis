@@ -151,6 +151,7 @@ return [
         'feedback_invalid_quantity' => 'Introduce una cantidad válida.',
         'feedback_no_stock' => 'No hay suficiente stock para esa cantidad.',
         'feedback_added' => 'Producto añadido al carrito.',
+        'feedback_update_error' => 'No se pudo actualizar el carrito.',
     ],
     'checkout' => [
         'title' => 'Finalizar pedido',

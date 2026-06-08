@@ -151,6 +151,7 @@ return [
         'feedback_invalid_quantity' => 'Introduïx una quantitat vàlida.',
         'feedback_no_stock' => 'No hi ha suficient estoc per a eixa quantitat.',
         'feedback_added' => 'Producte afegit a la cistella.',
+        'feedback_update_error' => 'No s’ha pogut actualitzar la cistella.',
     ],
     'checkout' => [
         'title' => 'Finalitzar comanda',
