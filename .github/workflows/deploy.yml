@@ -29,33 +29,57 @@ jobs:
 
             APP_DIR=/home/panos/development/laravel/Agrivall-Web-Panagiotis
             REPO_URL=https://github.com/SaidinPrev/Agrivall-Web-Panagiotis.git
+            PARENT_DIR="$(dirname "$APP_DIR")"
+            BACKUP_DIR="$(mktemp -d)"
 
-            mkdir -p "$(dirname "$APP_DIR")"
+            trap 'rm -rf "$BACKUP_DIR"' EXIT
+            mkdir -p "$PARENT_DIR"
 
-            if [ ! -d "$APP_DIR/.git" ]; then
-              tmp_dir="$(mktemp -d)"
-              git clone --branch main --depth 1 "$REPO_URL" "$tmp_dir"
+            if [ -d "$APP_DIR" ]; then
+              if [ -f "$APP_DIR/vendor/bin/sail" ]; then
+                (
+                  cd "$APP_DIR"
+                  ./vendor/bin/sail down || true
+                )
+              fi
 
-              mkdir -p "$APP_DIR"
-              rsync -a --delete \
-                --exclude '.env' \
-                --exclude 'storage/' \
-                --exclude 'vendor/' \
-                --exclude 'node_modules/' \
-                --exclude 'public/build/' \
-                "$tmp_dir"/ "$APP_DIR"/
+              if [ -f "$APP_DIR/.env" ]; then
+                cp "$APP_DIR/.env" "$BACKUP_DIR/.env"
+              fi
 
-              rm -rf "$tmp_dir"
+              if [ -d "$APP_DIR/storage" ]; then
+                cp -a "$APP_DIR/storage" "$BACKUP_DIR/storage"
+              fi
+
+              rm -rf "$APP_DIR"
             fi
 
+            git clone --branch main --depth 1 "$REPO_URL" "$APP_DIR"
             cd "$APP_DIR"
 
-            git remote set-url origin "$REPO_URL"
-            git fetch origin main
-            git checkout main
-            git reset --hard origin/main
+            if [ -f "$BACKUP_DIR/.env" ]; then
+              cp "$BACKUP_DIR/.env" "$APP_DIR/.env"
+            elif [ ! -f "$APP_DIR/.env" ]; then
+              cp "$APP_DIR/.env.example" "$APP_DIR/.env"
+            fi
 
-            ./vendor/bin/sail down
+            if [ -d "$BACKUP_DIR/storage" ]; then
+              rm -rf "$APP_DIR/storage"
+              cp -a "$BACKUP_DIR/storage" "$APP_DIR/storage"
+            fi
+
+            docker run --rm -u "$(id -u):$(id -g)" \
+              -v "$APP_DIR":/app -w /app composer:2 \
+              composer install --no-interaction --prefer-dist --no-progress
+
+            docker run --rm -u "$(id -u):$(id -g)" \
+              -v "$APP_DIR":/app -w /app node:22 \
+              npm ci
+
+            docker run --rm -u "$(id -u):$(id -g)" \
+              -v "$APP_DIR":/app -w /app node:22 \
+              npm run build
+
             ./vendor/bin/sail up -d --build
 
             until ./vendor/bin/sail exec -T mysql mysqladmin ping -h"mysql" --silent; do
