@@ -1,5 +1,5 @@
 @extends('plantilla')
-@section('titulo', 'AgriVall')
+@section('titulo', __('site.meta.home_title'))
 @section('contenido')
 
     @include('partials.hero')

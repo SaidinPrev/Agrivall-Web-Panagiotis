@@ -109,7 +109,7 @@ class ShopController extends Controller
 
         return redirect()
             ->route('shop.index')
-            ->with('order_success', 'Tu pedido ha sido registrado correctamente.');
+            ->with('order_success', __('site.status.order_registered'));
     }
 
     public function storeHerbInquiry(HerbInquiryRequest $request)
@@ -120,6 +120,6 @@ class ShopController extends Controller
 
         return redirect()
             ->route('shop.index', ['producto' => 'hierbas'])
-            ->with('inquiry_success', 'Tu consulta sobre hierbas comestibles ha sido enviada correctamente.');
+            ->with('inquiry_success', __('site.status.herb_inquiry_sent'));
     }
 }

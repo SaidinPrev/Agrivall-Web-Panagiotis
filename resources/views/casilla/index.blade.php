@@ -1,13 +1,13 @@
 @extends('plantilla')
 
-@section('titulo', 'Reservar La Casilla | AgriVall')
+@section('titulo', __('site.meta.casilla_title'))
 
 @section('contenido')
     @php
         $calendarWeeks = $semanas
             ->map(function ($semana) {
                 $weekStart = \Carbon\CarbonImmutable::now()
-                    ->locale('es')
+                    ->locale(app()->getLocale())
                     ->setISODate($semana->anio, $semana->numero_semana)
                     ->startOfWeek();
                 $weekEnd = $weekStart->endOfWeek();
@@ -23,7 +23,7 @@
                     'anio' => $semana->anio,
                     'mondayDate' => $weekStart->toDateString(),
                     'sundayDate' => $weekEnd->toDateString(),
-                    'label' => "{$monthLabel} - Semana {$semana->numero_semana} - {$dayRangeLabel}",
+                    'label' => "{$monthLabel} - " . __('site.casilla_booking.week_label') . " {$semana->numero_semana} - {$dayRangeLabel}",
                 ];
             })
             ->values();
@@ -38,9 +38,9 @@
     <section id="casilla-booking-page" class="casilla-booking-page">
         <div class="section-shell">
             <div class="booking-intro">
-                <span>Reserva por semanas</span>
-                <h1>Disponibilidad de La Casilla</h1>
-                <p>Consulta las semanas disponibles y envíanos una solicitud de pre-reserva. Te responderemos para confirmar los detalles.</p>
+                <span>{{ __('site.casilla_booking.kicker') }}</span>
+                <h1>{{ __('site.casilla_booking.title') }}</h1>
+                <p>{{ __('site.casilla_booking.description') }}</p>
             </div>
 
             @if (session('casilla_success'))
@@ -55,17 +55,17 @@
                 <div class="booking-request">
                     <div class="booking-calendar">
                         <div class="booking-calendar__header">
-                            <strong>También puedes escogerla en el calendario</strong>
-                            <span>Haz clic en cualquier día de una semana disponible y se seleccionará completa, de lunes a domingo.</span>
+                            <strong>{{ __('site.casilla_booking.calendar_title') }}</strong>
+                            <span>{{ __('site.casilla_booking.calendar_help') }}</span>
                         </div>
                         <div id="casilla-calendar" data-casilla-calendar data-weeks='@json($calendarWeeks)'></div>
                     </div>
 
                     <form class="booking-form" action="{{ route('casilla.store') }}" method="POST">
                         @csrf
-                        <h2>Solicitar pre-reserva</h2>
+                        <h2>{{ __('site.casilla_booking.request_title') }}</h2>
                         <label>
-                            Semana
+                            {{ __('site.casilla_booking.week') }}
                             <select name="semana_casilla_id" data-casilla-week-select required>
                                 @forelse ($availableWeeks as $week)
                                     <option value="{{ $week['id'] }}" data-week-start="{{ $week['mondayDate'] }}"
@@ -74,12 +74,12 @@
                                         {{ $week['label'] }}
                                     </option>
                                 @empty
-                                    <option value="" disabled selected>No hay semanas disponibles en este momento</option>
+                                    <option value="" disabled selected>{{ __('site.casilla_booking.no_weeks') }}</option>
                                 @endforelse
                             </select>
                         </label>
                         <div class="booking-price" data-casilla-week-price>
-                            <span>Precio de la semana</span>
+                            <span>{{ __('site.casilla_booking.week_price') }}</span>
                             <strong>
                                 @if ($selectedWeekId)
                                     {{ number_format((float) data_get($availableWeeks->firstWhere('id', (int) $selectedWeekId), 'precio', 0), 2) }} €
@@ -89,22 +89,22 @@
                             </strong>
                         </div>
                         <label>
-                            Nombre
+                            {{ __('site.casilla_booking.name') }}
                             <input type="text" name="nombre" value="{{ old('nombre') }}" required>
                         </label>
                         <label>
-                            Email
+                            {{ __('site.casilla_booking.email') }}
                             <input type="email" name="email" value="{{ old('email') }}" required>
                         </label>
                         <label>
-                            Teléfono
+                            {{ __('site.casilla_booking.phone') }}
                             <input type="tel" name="telefono" value="{{ old('telefono') }}">
                         </label>
                         <label>
-                            Observaciones
+                            {{ __('site.casilla_booking.notes') }}
                             <textarea name="observaciones">{{ old('observaciones') }}</textarea>
                         </label>
-                        <button type="submit" @disabled(!$hasReservableWeeks)>Enviar solicitud</button>
+                        <button type="submit" @disabled(!$hasReservableWeeks)>{{ __('site.casilla_booking.send') }}</button>
                     </form>
                 </div>
             </div>

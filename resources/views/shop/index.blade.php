@@ -1,33 +1,31 @@
 @extends('plantilla')
 
-@section('titulo', 'Comprar | AgriVall')
+@section('titulo', __('site.meta.shop_title'))
 
 @section('contenido')
     <section id="shop-page" class="shop-page">
         <div class="section-shell">
             <div class="shop-page__intro">
-                <span class="shop-page__kicker">Compra directa</span>
-                <h1>Elige tus productos</h1>
-                <p>
-                    Selecciona producto, variedad, formato y cantidad. Después podrás revisar tu carrito antes de confirmar el pedido.
-                </p>
+                <span class="shop-page__kicker">{{ __('site.shop.kicker') }}</span>
+                <h1>{{ __('site.shop.title') }}</h1>
+                <p>{{ __('site.shop.description') }}</p>
             </div>
 
             <div class="shop-page__layout">
-                <section class="shop-page__catalog" aria-label="Selector de productos">
+                <section class="shop-page__catalog" aria-label="{{ __('site.shop.catalog_aria') }}">
                     <div id="shop-products-root">
-                        <p>Cargando productos...</p>
+                        <p>{{ __('site.shop.loading_products') }}</p>
                     </div>
                 </section>
 
-                <aside class="shop-page__cart" aria-label="Carrito de compra">
+                <aside class="shop-page__cart" aria-label="{{ __('site.shop.cart_aria') }}">
                     <div id="shop-options-root">
-                        <p>Cargando opciones...</p>
+                        <p>{{ __('site.shop.loading_options') }}</p>
                     </div>
 
                     <div id="shop-cart-root">
-                        <h2>Tu carrito</h2>
-                        <p>Añade productos para empezar tu pedido.</p>
+                        <h2>{{ __('site.shop.cart_title') }}</h2>
+                        <p>{{ __('site.shop.cart_empty') }}</p>
                     </div>
                 </aside>
             </div>

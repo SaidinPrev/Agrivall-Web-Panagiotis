@@ -5,7 +5,7 @@
 @section('contenido')
     <article id="blog-post-page" class="blog-post-page">
         <div class="section-shell">
-            <a href="{{ route('blog.index') }}" class="blog__link">Volver al blog</a>
+            <a href="{{ route('blog.index') }}" class="blog__link">{{ __('site.blog_page.back') }}</a>
             <div class="blog-post__hero">
                 <span>{{ $post->tipoPost->tipo }} · {{ $post->fecha_public->format('d/m/Y') }}</span>
                 <h1>{{ $post->titulo }}</h1>

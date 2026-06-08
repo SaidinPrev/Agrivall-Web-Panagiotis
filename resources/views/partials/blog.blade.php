@@ -2,11 +2,11 @@
     <div class="section-shell">
         <div class="blog-head">
             <div class="blog-heading">
-                <span class="blog-kicker">Últimas noticias</span>
-                <h2>Historias, campo y cultivo ecológico</h2>
+                <span class="blog-kicker">{{ __('site.blog_home.kicker') }}</span>
+                <h2>{{ __('site.blog_home.title') }}</h2>
             </div>
 
-            <a href="{{ route('blog.index') }}" class="blog__link">Explora nuestro blog</a>
+            <a href="{{ route('blog.index') }}" class="blog__link">{{ __('site.blog_home.cta') }}</a>
         </div>
 
         <div class="blog-grid">
@@ -24,11 +24,11 @@
                     <div class="blog-card__body">
                         <h3>{{ $post->titulo }}</h3>
                         <p>{{ \Illuminate\Support\Str::limit($post->noticia, 155) }}</p>
-                        <a href="{{ route('blog.show', $post) }}" class="blog__link">Leer noticia</a>
+                        <a href="{{ route('blog.show', $post) }}" class="blog__link">{{ __('site.blog_home.read_more') }}</a>
                     </div>
                 </article>
             @empty
-                <p>No hay noticias publicadas todavía.</p>
+                <p>{{ __('site.blog_home.empty') }}</p>
             @endforelse
         </div>
     </div>

@@ -1,12 +1,10 @@
 <div class="site-footer__inner section-shell">
     <div class="site-footer__top">
         <div class="site-footer__intro">
-            <h2>Sigamos en contacto</h2>
-            <p class="site-footer__lead">
-                Cultivamos cercanía, producto ecológico y una manera serena de disfrutar la Vall de la Gallinera.
-            </p>
-            <a href="#contacto" class="site-footer__cta">
-                Escríbenos
+            <h2>{{ __('site.footer.title') }}</h2>
+            <p class="site-footer__lead">{{ __('site.footer.lead') }}</p>
+            <a href="{{ route('home') }}#contacto" class="site-footer__cta">
+                {{ __('site.footer.cta') }}
                 <span class="site-footer__cta-icon"><i class="fa-solid fa-arrow-right"></i></span>
             </a>
         </div>
@@ -14,23 +12,23 @@
         <div class="site-footer__nav">
             <div class="site-footer__column">
                 <h3>AgriVall</h3>
-                <a href="#sobre-nosotros">Sobre nosotros</a>
-                <a href="#productos">Productos</a>
-                <a href="#casilla">La casilla</a>
+                <a href="{{ route('home') }}#sobre-nosotros">{{ __('site.footer.about') }}</a>
+                <a href="{{ route('home') }}#productos">{{ __('site.footer.products') }}</a>
+                <a href="{{ route('home') }}#casilla">{{ __('site.footer.casilla') }}</a>
             </div>
 
             <div class="site-footer__column">
-                <h3>Explora</h3>
-                <a href="#blog">Blog</a>
-                <a href="#contacto">Contacto</a>
+                <h3>{{ __('site.footer.explore') }}</h3>
+                <a href="{{ route('home') }}#blog">{{ __('site.footer.blog') }}</a>
+                <a href="{{ route('home') }}#contacto">{{ __('site.footer.contact') }}</a>
             </div>
         </div>
     </div>
 
     <div class="site-footer__bottom">
-        <p>&copy; AgriVall 2026. Todos los derechos reservados.</p>
+        <p>&copy; AgriVall 2026. {{ __('site.footer.rights') }}</p>
 
-        <div class="site-footer__socials" aria-label="Redes sociales">
+        <div class="site-footer__socials" aria-label="{{ __('site.footer.socials') }}">
             <a href="#" aria-label="Facebook">
                 <i class="fa-brands fa-facebook-f"></i>
             </a>
