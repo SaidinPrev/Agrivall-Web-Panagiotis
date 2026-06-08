@@ -28,6 +28,60 @@ const renderSelectOptions = (items, getValue, getLabel) => {
         .join("");
 };
 
+const getCsrfToken = () => {
+    return document
+        .querySelector('meta[name="csrf-token"]')
+        ?.getAttribute("content");
+};
+
+const buildCartPayload = (cart) => {
+    return {
+        items: cart.map((item) => {
+            return {
+                producto_id: item.producto.id,
+                cantidad: item.cantidad,
+            };
+        }),
+    };
+};
+
+const replaceCart = (cart, items) => {
+    cart.length = 0;
+
+    items.forEach((item) => {
+        cart.push({
+            producto: item.producto,
+            cantidad: item.cantidad,
+        });
+    });
+};
+
+const syncCart = async (cart) => {
+    const response = await fetch("/cart", {
+        method: "POST",
+        body: JSON.stringify(buildCartPayload(cart)),
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-CSRF-TOKEN": getCsrfToken(),
+        },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+    }
+
+    window.dispatchEvent(
+        new CustomEvent("cart:updated", {
+            detail: data,
+        }),
+    );
+
+    return data;
+};
+
 // Renders the selected product image and summary.
 const renderProductPreview = (productPreview, productSummary, producto) => {
     productPreview.innerHTML = `
@@ -99,7 +153,7 @@ const renderCart = (cartRoot, cart) => {
     const removeButtons = cartRoot.querySelectorAll(".shop-cart__remove");
 
     removeButtons.forEach((button) => {
-        button.addEventListener("click", () => {
+        button.addEventListener("click", async () => {
             const productId = Number(button.dataset.productId);
             const itemIndex = cart.findIndex((item) => {
                 return item.producto.id === productId;
@@ -110,46 +164,21 @@ const renderCart = (cartRoot, cart) => {
             }
 
             cart.splice(itemIndex, 1);
-            renderCart(cartRoot, cart);
+
+            try {
+                const cartData = await syncCart(cart);
+                replaceCart(cart, cartData.items);
+                renderCart(cartRoot, cart);
+            } catch (error) {
+                console.error(error);
+            }
         });
     });
 
     const checkoutButton = cartRoot.querySelector(".shop-cart__checkout");
     if (checkoutButton) {
-        checkoutButton.addEventListener("click", async () => {
-            const cartPayload = {
-                items: cart.map((item) => {
-                    return {
-                        producto_id: item.producto.id,
-                        cantidad: item.cantidad,
-                    };
-                }),
-            };
-            const csrfToken = document
-                .querySelector('meta[name="csrf-token"]')
-                ?.getAttribute("content");
-            const url = "/cart";
-
-            try {
-                const response = await fetch(url, {
-                    method: "POST",
-                    body: JSON.stringify(cartPayload),
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                        "X-CSRF-TOKEN": csrfToken,
-                    },
-                });
-                const data = await response.json();
-                console.log(data);
-
-                if (!response.ok) {
-                    throw new Error(`Response status: ${response.status}`);
-                }
-                window.location.href = "/checkout";
-            } catch (error) {
-                console.error(error);
-            }
+        checkoutButton.addEventListener("click", () => {
+            window.location.href = "/checkout";
         });
     }
 };
@@ -371,7 +400,7 @@ const renderProductConfigurator = (
         renderProductPreview(productPreview, productSummary, selectedProduct);
     });
 
-    addToCartButton.addEventListener("click", () => {
+    addToCartButton.addEventListener("click", async () => {
         const selectedProductName = productSelect.value;
         const selectedVarietyName = varietySelect.value;
         const selectedProductId = Number(formatSelect.value);
@@ -400,17 +429,36 @@ const renderProductConfigurator = (
             return;
         }
 
-        if (existingCartItem) {
-            existingCartItem.cantidad += cantidad;
+        const nextCart = cart.map((item) => {
+            return {
+                producto: item.producto,
+                cantidad: item.cantidad,
+            };
+        });
+
+        const existingNextCartItem = nextCart.find((item) => {
+            return item.producto.id === selectedProduct.id;
+        });
+
+        if (existingNextCartItem) {
+            existingNextCartItem.cantidad += cantidad;
         } else {
-            cart.push({
+            nextCart.push({
                 producto: selectedProduct,
                 cantidad,
             });
         }
-        quantityInput.value = 1;
-        feedback.textContent = "Producto añadido al carrito.";
-        renderCart(cartRoot, cart);
+
+        try {
+            const cartData = await syncCart(nextCart);
+            replaceCart(cart, cartData.items);
+            quantityInput.value = 1;
+            feedback.textContent = "Producto añadido al carrito.";
+            renderCart(cartRoot, cart);
+        } catch (error) {
+            feedback.textContent = "No se pudo actualizar el carrito.";
+            console.error(error);
+        }
     });
 };
 
@@ -424,8 +472,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    renderCart(cartRoot, cart);
-
     const searchParams = new URLSearchParams(window.location.search);
     const requestedProduct = searchParams.get("producto");
 
@@ -434,10 +480,18 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    fetch("/api/productos")
-        .then((response) => response.json())
-        .then((productos) => {
+    Promise.all([
+        fetch("/api/productos").then((response) => response.json()),
+        fetch("/cart", {
+            headers: {
+                Accept: "application/json",
+            },
+        }).then((response) => response.json()),
+    ])
+        .then(([productos, cartData]) => {
             const groupedProducts = groupProducts(productos);
+            replaceCart(cart, cartData.items);
+            renderCart(cartRoot, cart);
 
             renderProductConfigurator(
                 productsRoot,
@@ -451,5 +505,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(() => {
             productsRoot.innerHTML =
                 "<p>No se han podido cargar los productos.</p>";
+            renderCart(cartRoot, cart);
         });
 });
