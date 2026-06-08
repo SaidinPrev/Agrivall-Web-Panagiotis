@@ -14,9 +14,11 @@
 </head>
 
 <body>
-    
+    @include('partials.headerNav')
     <main>
-        @include('partials.headerNav')
+        <a href="#" class="back-to-top">
+            <i class="fa-solid fa-arrow-up"></i>
+        </a>
         @yield('contenido')
     </main>
 
