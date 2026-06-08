@@ -1,9 +1,4 @@
-import './nav';
-import './about';
-import './products';
-import './casilla';
 import './casilla-calendar';
-import './back-to-top';
 import './shop';
 import './flash-modal';
 import './admin-semanas-casilla';
