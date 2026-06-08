@@ -23,14 +23,37 @@ jobs:
           host: ${{ secrets.IP }}
           username: ${{ secrets.USER_NAME }}
           password: ${{ secrets.PASSWORD }}
+          script_stop: true
           script: |
             set -e
 
-            cd /home/panos/development/laravel/Agrivall-Web-Panagiotis
+            APP_DIR=/home/panos/development/laravel/Agrivall-Web-Panagiotis
+            REPO_URL=https://github.com/SaidinPrev/Agrivall-Web-Panagiotis.git
 
+            mkdir -p "$(dirname "$APP_DIR")"
+
+            if [ ! -d "$APP_DIR/.git" ]; then
+              tmp_dir="$(mktemp -d)"
+              git clone --branch main --depth 1 "$REPO_URL" "$tmp_dir"
+
+              mkdir -p "$APP_DIR"
+              rsync -a --delete \
+                --exclude '.env' \
+                --exclude 'storage/' \
+                --exclude 'vendor/' \
+                --exclude 'node_modules/' \
+                --exclude 'public/build/' \
+                "$tmp_dir"/ "$APP_DIR"/
+
+              rm -rf "$tmp_dir"
+            fi
+
+            cd "$APP_DIR"
+
+            git remote set-url origin "$REPO_URL"
             git fetch origin main
             git checkout main
-            git pull --ff-only origin main
+            git reset --hard origin/main
 
             ./vendor/bin/sail down
             ./vendor/bin/sail up -d --build
