@@ -29,7 +29,7 @@ class CasillaController extends Controller
         if ($semana->estado !== 'DISPONIBLE') {
             return redirect()
                 ->route('casilla.index')
-                ->with('casilla_error', 'La semana seleccionada ya no está disponible.');
+                ->with('casilla_error', __('site.status.week_unavailable'));
         }
 
         $semana->update(['estado' => 'PRE-RESERVA']);
@@ -38,6 +38,6 @@ class CasillaController extends Controller
 
         return redirect()
             ->route('casilla.index')
-            ->with('casilla_success', 'Tu solicitud de reserva se ha enviado correctamente.');
+            ->with('casilla_success', __('site.status.week_request_sent'));
     }
 }

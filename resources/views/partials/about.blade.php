@@ -1,17 +1,14 @@
 <section id="sobre-nosotros" class="about-story">
     <div class="about-media">
-        <img src="{{ asset('imgs/apricotHandBright.jpg') }}" alt="Albaricoques en la mano">
+        <img src="{{ asset('imgs/apricotHandBright.jpg') }}" alt="{{ __('site.about.image_alt') }}">
     </div>
 
     <div class="about-overlay">
         <div class="about-shell">
             <div class="about-content about-reveal">
-                <h2>Cultivamos con respeto por la tierra</h2>
+                <h2>{{ __('site.about.title') }}</h2>
                 <p>
-                    En <strong>AgriVall</strong> somos una empresa familiar dedicada al cultivo
-                    ecológico. Desde 1994 trabajamos con calma, cuidando cada fruto desde el origen para ofrecer un producto
-                    cercano,
-                    honesto y lleno de sabor.
+                    {{ __('site.about.body') }}
                 </p>
             </div>
         </div>
@@ -19,26 +16,19 @@
 </section>
 <section id="vision-mission" class="vision-mission">
     <div class="vision-mission-media">
-        <img src="{{ asset('imgs/walnut.jpg') }}" alt="Nueces">
+        <img src="{{ asset('imgs/walnut.jpg') }}" alt="{{ __('site.about.walnut_alt') }}">
     </div>
     <div class="vision-mission-overlay">
         <div class="vision-mission-shell">
             <div class="vision-mission-content">
                 <article class="pillar-card pillar-reveal">
-                    <h3>Nuestra visión</h3>
-                    <p>
-                        Ser un referente en la producción ecológica y contribuir al desarrollo económico y social de
-                        las zonas rurales en peligro de despoblación.
-                    </p>
+                    <h3>{{ __('site.about.vision_title') }}</h3>
+                    <p>{{ __('site.about.vision_body') }}</p>
                 </article>
 
                 <article class="pillar-card pillar-reveal">
-                    <h3>Nuestra misión</h3>
-                    <p>
-                        Ofrecer cereza ecológica y otros productos de calidad a quienes valoran la cercanía, el
-                        sabor y el respeto por la tierra, cultivando con cuidado en un entorno único como la Vall
-                        de la Gallinera.
-                    </p>
+                    <h3>{{ __('site.about.mission_title') }}</h3>
+                    <p>{{ __('site.about.mission_body') }}</p>
                 </article>
             </div>
         </div>

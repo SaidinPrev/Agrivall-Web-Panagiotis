@@ -1,4 +1,14 @@
 // Groups flat API products by product name and variety.
+const shopTranslations = window.Agrivall?.translations?.shop ?? {};
+
+const t = (key, fallback) => {
+    return shopTranslations[key] ?? fallback;
+};
+
+const translateProductName = (name) => {
+    return shopTranslations.product_names?.[name] ?? name;
+};
+
 const groupProducts = (productos) => {
     return productos.reduce((groups, producto) => {
         if (!groups[producto.nombre]) {
@@ -41,11 +51,11 @@ const renderProductPreview = (productPreview, productSummary, producto) => {
     `;
 
     productSummary.innerHTML = `
-        <h3>${producto.nombre} ${producto.variedad}</h3>
+        <h3>${translateProductName(producto.nombre)} ${producto.variedad}</h3>
         <p class="shop-product-summary__price">${producto.precio} €</p>
-        <p>Formato: ${producto.formato}</p>
+        <p>${t("format", "Formato")}: ${producto.formato}</p>
         <p class="shop-product-summary__availability ${producto.disponible ? "is-available" : "is-unavailable"}">
-            ${producto.disponible ? "Disponible" : "No disponible"}
+            ${producto.disponible ? t("available", "Disponible") : t("unavailable", "No disponible")}
         </p>
     `;
 };
@@ -54,8 +64,8 @@ const renderProductPreview = (productPreview, productSummary, producto) => {
 const renderCart = (cartRoot, cart) => {
     if (cart.length === 0) {
         cartRoot.innerHTML = `
-            <h2>Tu carrito</h2>
-            <p>Añade productos para empezar tu pedido.</p>
+            <h2>${t("cart_title", "Tu carrito")}</h2>
+            <p>${t("cart_empty", "Añade productos para empezar tu pedido.")}</p>
         `;
 
         return;
@@ -66,14 +76,14 @@ const renderCart = (cartRoot, cart) => {
     }, 0);
 
     cartRoot.innerHTML = `
-        <h2>Tu carrito</h2>
+        <h2>${t("cart_title", "Tu carrito")}</h2>
         <ul class="shop-cart__items">
             ${cart
                 .map((item) => {
                     return `
                         <li class="shop-cart__item">
                             <span>
-                                ${item.producto.nombre} ${item.producto.variedad}
+                                ${translateProductName(item.producto.nombre)} ${item.producto.variedad}
                                 ${item.producto.formato}
                                 x ${item.cantidad}
                             </span>
@@ -82,7 +92,7 @@ const renderCart = (cartRoot, cart) => {
                                 class="shop-cart__remove"
                                 data-product-id="${item.producto.id}"
                             >
-                                Eliminar
+                                ${t("remove", "Eliminar")}
                             </button>
                         </li>
                     `;
@@ -90,10 +100,10 @@ const renderCart = (cartRoot, cart) => {
                 .join("")}
         </ul>
         <p class="shop-cart__total">
-            Total: ${total.toFixed(2)} €
+            ${t("total", "Total")}: ${total.toFixed(2)} €
         </p>
         <button type="button" class="shop-cart__checkout">
-            Finalizar pedido
+            ${t("checkout", "Finalizar pedido")}
         </button>
     `;
     const removeButtons = cartRoot.querySelectorAll(".shop-cart__remove");
@@ -164,7 +174,7 @@ const renderHerbInquiry = (productsRoot, optionsRoot, cartRoot) => {
         <article class="shop-product-preview__card shop-herb-preview">
             <img
                 src="/imgs/herbVariety.jpg"
-                alt="Hierbas comestibles"
+                alt="${t("herb_alt", "Hierbas comestibles")}"
                 class="shop-product-preview__image"
             >
         </article>
@@ -173,45 +183,39 @@ const renderHerbInquiry = (productsRoot, optionsRoot, cartRoot) => {
     optionsRoot.innerHTML = `
         <form class="shop-herb-form" action="/consulta-hierbas" method="POST">
             <input type="hidden" name="_token" value="${csrfToken}">
-            <h2>Consulta sobre hierbas comestibles</h2>
-            <p>
-                Este producto se trabaja bajo consulta para restaurantes, hoteles y negocios.
-                Cuéntanos qué necesitas y te responderemos por email.
-            </p>
+            <h2>${t("herb_title", "Consulta sobre hierbas comestibles")}</h2>
+            <p>${t("herb_description", "Este producto se trabaja bajo consulta para restaurantes, hoteles y negocios. Cuéntanos qué necesitas y te responderemos por email.")}</p>
 
             <label class="shop-configurator__field">
-                <span>Nombre</span>
+                <span>${t("name", "Nombre")}</span>
                 <input type="text" name="nombre" required minlength="5">
             </label>
 
             <label class="shop-configurator__field">
-                <span>Email</span>
+                <span>${t("email", "Email")}</span>
                 <input type="email" name="email" required>
             </label>
 
             <label class="shop-configurator__field">
-                <span>Teléfono</span>
+                <span>${t("phone", "Teléfono")}</span>
                 <input type="tel" name="telefono">
             </label>
 
             <label class="shop-configurator__field">
-                <span>Mensaje</span>
+                <span>${t("message", "Mensaje")}</span>
                 <textarea name="mensaje" required minlength="15"></textarea>
             </label>
 
             <button type="submit" class="shop-configurator__submit">
-                Enviar consulta
+                ${t("send_inquiry", "Enviar consulta")}
             </button>
         </form>
     `;
 
     cartRoot.innerHTML = `
         <div class="shop-herb-note">
-            <h2>Venta bajo consulta</h2>
-            <p>
-                Las hierbas comestibles no se compran directamente online.
-                Revisaremos disponibilidad, variedades y cantidades según tu solicitud.
-            </p>
+            <h2>${t("herb_note_title", "Venta bajo consulta")}</h2>
+            <p>${t("herb_note_description", "Las hierbas comestibles no se compran directamente online. Revisaremos disponibilidad, variedades y cantidades según tu solicitud.")}</p>
         </div>
     `;
 };
@@ -240,22 +244,22 @@ const renderProductConfigurator = (
 
     optionsRoot.innerHTML = `
         <div class="shop-configurator">
-            <h2>Configura tu pedido</h2>
+            <h2>${t("configurator_title", "Configura tu pedido")}</h2>
             <div id="shop-product-summary" class="shop-product-summary"></div>
 
             <label class="shop-configurator__field">
-                <span>Producto</span>
+                <span>${t("product", "Producto")}</span>
                 <select id="shop-product-select">
                     ${renderSelectOptions(
                         productNames,
                         (productName) => productName,
-                        (productName) => productName,
+                        (productName) => translateProductName(productName),
                     )}
                 </select>
             </label>
 
             <label class="shop-configurator__field">
-                <span>Variedad</span>
+                <span>${t("variety", "Variedad")}</span>
                 <select id="shop-variety-select">
                     ${renderSelectOptions(
                         varietyNames,
@@ -266,7 +270,7 @@ const renderProductConfigurator = (
             </label>
 
             <label class="shop-configurator__field">
-                <span>Formato</span>
+                <span>${t("format", "Formato")}</span>
                 <select id="shop-format-select">
                     ${renderSelectOptions(
                         formatProducts,
@@ -277,7 +281,7 @@ const renderProductConfigurator = (
             </label>
 
             <label class="shop-configurator__field">
-                <span>Cantidad</span>
+                <span>${t("quantity", "Cantidad")}</span>
                 <input
                     id="shop-quantity-input"
                     type="number"
@@ -291,7 +295,7 @@ const renderProductConfigurator = (
                 type="button"
                 class="shop-configurator__submit"
             >
-                Añadir al carrito
+                ${t("add_to_cart", "Añadir al carrito")}
             </button>
             <p id="shop-feedback" class="shop-configurator__feedback"></p>
         </div>
@@ -377,7 +381,7 @@ const renderProductConfigurator = (
         const selectedProductId = Number(formatSelect.value);
         const cantidad = Number(quantityInput.value);
         if (!Number.isInteger(cantidad) || cantidad < 1) {
-            feedback.textContent = "Introduce una cantidad válida.";
+            feedback.textContent = t("feedback_invalid_quantity", "Introduce una cantidad válida.");
             return;
         }
         const formatProducts =
@@ -396,7 +400,7 @@ const renderProductConfigurator = (
             : 0;
         const requestedQuantity = quantityAlreadyInCart + cantidad;
         if (requestedQuantity > selectedProduct.stock) {
-            feedback.textContent = "No hay suficiente stock para esa cantidad.";
+            feedback.textContent = t("feedback_no_stock", "No hay suficiente stock para esa cantidad.");
             return;
         }
 
@@ -409,7 +413,7 @@ const renderProductConfigurator = (
             });
         }
         quantityInput.value = 1;
-        feedback.textContent = "Producto añadido al carrito.";
+        feedback.textContent = t("feedback_added", "Producto añadido al carrito.");
         renderCart(cartRoot, cart);
     });
 };
@@ -450,6 +454,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(() => {
             productsRoot.innerHTML =
-                "<p>No se han podido cargar los productos.</p>";
+                `<p>${t("cannot_load", "No se han podido cargar los productos.")}</p>`;
         });
 });

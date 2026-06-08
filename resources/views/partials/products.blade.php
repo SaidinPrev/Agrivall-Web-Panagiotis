@@ -1,57 +1,52 @@
 <section id="productos" class="products-section">
     <div class="section-shell">
         <div class="products-intro">
-            <span class="products-kicker">Nuestros productos</span>
-            <h2>Sabores de temporada cultivados con cuidado</h2>
-            <p>
-                Cada producto nace del mismo compromiso: cercanía, respeto por la tierra y calidad en el momento justo
-                de la cosecha.
-            </p>
+            <span class="products-kicker">{{ __('site.products.kicker') }}</span>
+            <h2>{{ __('site.products.title') }}</h2>
+            <p>{{ __('site.products.body') }}</p>
         </div>
 
         <div class="products-grid">
             <article class="product-card">
                 <div class="product-card__media">
-                    <img src="{{ asset('imgs/cherries.jpg') }}" alt="Cerezas ecológicas">
+                    <img src="{{ asset('imgs/cherries.jpg') }}" alt="{{ __('site.products.catalog.cherries.alt') }}">
                     <div class="product-card__body">
-                        <h3>Cerezas</h3>
-                        <p>Fruta delicada y de temporada, recolectada con cuidado para conservar todo su sabor.</p>
-                        <a href="{{ route('shop.index', ['producto' => 'Cereza']) }}" class="product-card__link">Comprar</a>
+                        <h3>{{ __('site.products.catalog.cherries.title') }}</h3>
+                        <p>{{ __('site.products.catalog.cherries.description') }}</p>
+                        <a href="{{ route('shop.index', ['producto' => 'Cereza']) }}" class="product-card__link">{{ __('site.products.catalog.cherries.cta') }}</a>
                     </div>
                 </div>
             </article>
 
             <article class="product-card">
                 <div class="product-card__media">
-                    <img src="{{ asset('imgs/walnuts.jpg') }}" alt="Nueces ecológicas">
+                    <img src="{{ asset('imgs/walnuts.jpg') }}" alt="{{ __('site.products.catalog.walnuts.alt') }}">
                     <div class="product-card__body">
-                        <h3>Nueces</h3>
-                        <p>Un fruto lleno de matices, cultivado con paciencia y respeto por el ritmo natural del campo.
-                        </p>
-                        <a href="{{ route('shop.index', ['producto' => 'Nuez']) }}" class="product-card__link">Comprar</a>
+                        <h3>{{ __('site.products.catalog.walnuts.title') }}</h3>
+                        <p>{{ __('site.products.catalog.walnuts.description') }}</p>
+                        <a href="{{ route('shop.index', ['producto' => 'Nuez']) }}" class="product-card__link">{{ __('site.products.catalog.walnuts.cta') }}</a>
                     </div>
                 </div>
             </article>
 
             <article class="product-card">
                 <div class="product-card__media">
-                    <img src="{{ asset('imgs/apricots.jpg') }}" alt="Albaricoques ecológicos">
+                    <img src="{{ asset('imgs/apricots.jpg') }}" alt="{{ __('site.products.catalog.apricots.alt') }}">
                     <div class="product-card__body">
-                        <h3>Albaricoques</h3>
-                        <p>Dulces, aromáticos y llenos de luz, cosechados en su mejor momento de maduración.</p>
-                        <a href="{{ route('shop.index', ['producto' => 'Albaricoque']) }}" class="product-card__link">Comprar</a>
+                        <h3>{{ __('site.products.catalog.apricots.title') }}</h3>
+                        <p>{{ __('site.products.catalog.apricots.description') }}</p>
+                        <a href="{{ route('shop.index', ['producto' => 'Albaricoque']) }}" class="product-card__link">{{ __('site.products.catalog.apricots.cta') }}</a>
                     </div>
                 </div>
             </article>
 
             <article class="product-card">
                 <div class="product-card__media">
-                    <img src="{{ asset('imgs/herbVariety.jpg') }}" alt="Hierbas aromáticas">
+                    <img src="{{ asset('imgs/herbVariety.jpg') }}" alt="{{ __('site.products.catalog.herbs.alt') }}">
                     <div class="product-card__body">
-                        <h3>Hierbas comestibles</h3>
-                        <p>Variedades frescas y llenas de carácter para quienes buscan sabor y proximidad en su cocina.
-                        </p>
-                        <a href="{{ route('shop.index', ['producto' => 'hierbas']) }}" class="product-card__link">Consultar</a>
+                        <h3>{{ __('site.products.catalog.herbs.title') }}</h3>
+                        <p>{{ __('site.products.catalog.herbs.description') }}</p>
+                        <a href="{{ route('shop.index', ['producto' => 'hierbas']) }}" class="product-card__link">{{ __('site.products.catalog.herbs.cta') }}</a>
                     </div>
                 </div>
             </article>

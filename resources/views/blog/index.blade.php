@@ -1,14 +1,14 @@
 @extends('plantilla')
 
-@section('titulo', 'Blog | AgriVall')
+@section('titulo', __('site.meta.blog_title'))
 
 @section('contenido')
     <section id="blog-page" class="blog-page">
         <div class="section-shell">
             <div class="blog-page__intro">
-                <span>Noticias</span>
-                <h1>Bienvenidos a nuestro blog</h1>
-                <p>Actualidad, cultivos, ecología y experiencias alrededor de la Vall de la Gallinera.</p>
+                <span>{{ __('site.blog_page.kicker') }}</span>
+                <h1>{{ __('site.blog_page.title') }}</h1>
+                <p>{{ __('site.blog_page.description') }}</p>
             </div>
 
             <div class="blog-grid">
@@ -24,11 +24,11 @@
                         <div class="blog-card__body">
                             <h2>{{ $post->titulo }}</h2>
                             <p>{{ \Illuminate\Support\Str::limit($post->noticia, 180) }}</p>
-                            <a href="{{ route('blog.show', $post) }}" class="blog__link">Leer noticia</a>
+                            <a href="{{ route('blog.show', $post) }}" class="blog__link">{{ __('site.blog_page.read_more') }}</a>
                         </div>
                     </article>
                 @empty
-                    <p>No hay noticias publicadas todavía.</p>
+                    <p>{{ __('site.blog_page.empty') }}</p>
                 @endforelse
             </div>
 
