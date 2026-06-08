@@ -1,4 +1,7 @@
 <header>
+    @php
+        $cartLineCount = count(session('cart', []));
+    @endphp
     <nav class="site-nav" aria-label="Navegación principal">
         <div class="site-nav__inner">
             <a class="site-nav__brand" href="{{ route('home') }}">
@@ -25,6 +28,22 @@
                     </li>
                     <li class="site-nav__item">
                         <a class="site-nav__link" href="{{ route('home') }}#contacto">Contacto</a>
+                    </li>
+                    <li class="site-nav__item site-nav__item--cart">
+                        <button class="site-nav__link site-nav__cart-toggle" type="button" aria-expanded="false"
+                            aria-controls="site-nav-cart-menu" data-cart-toggle>
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                            <span
+                                class="site-nav__cart-count{{ $cartLineCount === 0 ? ' is-empty' : '' }}"
+                                data-cart-count>{{ $cartLineCount }}</span>
+                            <span class="visually-hidden">Abrir carrito</span>
+                        </button>
+                        <div class="site-nav__cart-dropdown" id="site-nav-cart-menu" data-cart-dropdown>
+                            <div class="site-nav__cart-summary" data-cart-summary>
+                                <p>Tu carrito está vacío.</p>
+                            </div>
+                            <a class="site-nav__cart-link" href="{{ route('shop.index') }}">Ver tu carrito</a>
+                        </div>
                     </li>
                     <li class="site-nav__item site-nav__item--dropdown">
                         <button class="site-nav__link site-nav__dropdown-toggle" type="button" aria-expanded="false"

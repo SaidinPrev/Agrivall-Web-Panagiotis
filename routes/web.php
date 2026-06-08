@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\TipoPostController as AdminTipoPostController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/comprar', [ShopController::class, 'index'])->name('shop.index');
+Route::get('/cart', [CartApiController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartApiController::class, 'store'])->name('cart.store');
 Route::get('/checkout', [ShopController::class, 'checkout'])->name('checkout.index');
 Route::post('/checkout', [ShopController::class, 'storeCheckout'])->name('checkout.store');
