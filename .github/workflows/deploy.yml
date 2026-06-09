@@ -32,6 +32,9 @@ jobs:
             git checkout main
             git pull --ff-only origin main
 
+            npm ci
+            npm run build
+
             ./vendor/bin/sail down
             ./vendor/bin/sail up -d --build
 
