@@ -18,6 +18,7 @@ return [
         'blog_title' => 'Blog | AgriVall',
     ],
     'nav' => [
+        'main_navigation' => 'Navegació principal',
         'home' => 'Inici',
         'products' => 'Productes',
         'casilla' => 'La Casilla',
@@ -25,6 +26,11 @@ return [
         'contact' => 'Contacte',
         'open_menu' => 'Obrir menú',
         'open_cart' => 'Obrir cistella',
+    ],
+    'header_cart' => [
+        'empty' => 'La teua cistella està buida.',
+        'view_cart' => 'Veure la teua cistella',
+        'total' => 'Total',
     ],
     'hero' => [
         'image_alt' => 'Fruita ecològica',

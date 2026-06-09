@@ -1,3 +1,14 @@
+const headerCartTranslations = window.Agrivall?.translations?.headerCart ?? {};
+const shopTranslations = window.Agrivall?.translations?.shop ?? {};
+
+const t = (key, fallback) => {
+    return headerCartTranslations[key] ?? fallback;
+};
+
+const translateProductName = (name) => {
+    return shopTranslations.product_names?.[name] ?? name;
+};
+
 const formatCurrency = (value) => {
     return `${Number(value).toFixed(2)} €`;
 };
@@ -9,7 +20,7 @@ const renderHeaderCart = (dropdownSummary, counter, cartData) => {
     counter.classList.toggle("is-empty", lineCount === 0);
 
     if (lineCount === 0) {
-        dropdownSummary.innerHTML = "<p>Tu carrito está vacío.</p>";
+        dropdownSummary.innerHTML = `<p>${t("empty", "Tu carrito está vacío.")}</p>`;
         return;
     }
 
@@ -20,7 +31,7 @@ const renderHeaderCart = (dropdownSummary, counter, cartData) => {
                     return `
                         <li class="site-nav__cart-item">
                             <div>
-                                <strong>${item.producto.nombre} ${item.producto.variedad}</strong>
+                                <strong>${translateProductName(item.producto.nombre)} ${item.producto.variedad}</strong>
                                 <span>${item.producto.formato} x ${item.cantidad}</span>
                             </div>
                             <span>${formatCurrency(item.subtotal)}</span>
@@ -29,7 +40,7 @@ const renderHeaderCart = (dropdownSummary, counter, cartData) => {
                 })
                 .join("")}
         </ul>
-        <p class="site-nav__cart-total">Total: ${formatCurrency(total)}</p>
+        <p class="site-nav__cart-total">${t("total", "Total")}: ${formatCurrency(total)}</p>
     `;
 };
 

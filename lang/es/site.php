@@ -18,6 +18,7 @@ return [
         'blog_title' => 'Blog | AgriVall',
     ],
     'nav' => [
+        'main_navigation' => 'Navegación principal',
         'home' => 'Inicio',
         'products' => 'Productos',
         'casilla' => 'La Casilla',
@@ -25,6 +26,11 @@ return [
         'contact' => 'Contacto',
         'open_menu' => 'Abrir menú',
         'open_cart' => 'Abrir carrito',
+    ],
+    'header_cart' => [
+        'empty' => 'Tu carrito está vacío.',
+        'view_cart' => 'Ver tu carrito',
+        'total' => 'Total',
     ],
     'hero' => [
         'image_alt' => 'Fruta ecológica',

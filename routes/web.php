@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CartApiController;
 use App\Http\Controllers\BlogController;
@@ -12,12 +14,28 @@ use App\Http\Controllers\Admin\PostBlogController as AdminPostBlogController;
 use App\Http\Controllers\Admin\SemanaCasillaController as AdminSemanaCasillaController;
 use App\Http\Controllers\Admin\TipoPostController as AdminTipoPostController;
 
-Route::get('/idioma/{locale}', function (string $locale): RedirectResponse {
+Route::get('/idioma/{locale}', function (Request $request, string $locale): RedirectResponse {
     abort_unless(in_array($locale, ['es', 'ca'], true), 404);
 
     session(['locale' => $locale]);
 
-    return redirect()->to(url()->previous() ?: route('home'));
+    $redirect = $request->query('redirect');
+
+    if (is_string($redirect) && $redirect !== '') {
+        if (Str::startsWith($redirect, '/')) {
+            return redirect()->to($redirect);
+        }
+
+        if (Str::startsWith($redirect, $request->getSchemeAndHttpHost())) {
+            return redirect()->to($redirect);
+        }
+    }
+
+    if (url()->previous()) {
+        return redirect()->to(url()->previous());
+    }
+
+    return redirect()->to('/');
 })->name('locale.switch');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
