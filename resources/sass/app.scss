@@ -402,6 +402,8 @@ header.site-header--hidden {
   .site-nav__item--dropdown.is-open .site-nav__dropdown {
     max-height: 5rem;
     margin-top: 0.35rem;
+    opacity: 1;
+    visibility: visible;
   }
 
   .site-nav__dropdown-link {
