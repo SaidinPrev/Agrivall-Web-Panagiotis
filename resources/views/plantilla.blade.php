@@ -42,6 +42,11 @@
                 'feedback_update_error' => __('site.shop.feedback_update_error'),
                 'product_names' => trans('site.products.product_names'),
             ],
+            'headerCart' => [
+                'empty' => __('site.header_cart.empty'),
+                'view_cart' => __('site.header_cart.view_cart'),
+                'total' => __('site.header_cart.total'),
+            ],
         ];
     @endphp
     <script>

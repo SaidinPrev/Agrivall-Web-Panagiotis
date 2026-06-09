@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuButtonIcon = document.querySelector('.site-nav__toggle i');
     const navOverlay = document.querySelector('.nav-overlay');
     const navPanel = document.querySelector('.site-nav__panel');
+    const siteHeader = document.querySelector('header');
     const dropdownItem = document.querySelector('.site-nav__item--dropdown');
     const dropdownButton = document.querySelector('.site-nav__dropdown-toggle');
 
@@ -42,6 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    navPanel.addEventListener('click', (event) => {
+        const link = event.target.closest('a');
+
+        if (link && window.innerWidth < 992) {
+            closeMenu();
+        }
+    });
+
     if (dropdownItem && dropdownButton) {
         const closeDropdown = () => {
             dropdownItem.classList.remove('is-open');
@@ -67,4 +76,34 @@ document.addEventListener('DOMContentLoaded', () => {
             closeMenu();
         }
     });
+
+    if (siteHeader) {
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+        const revealThreshold = 140;
+        const delta = 8;
+
+        const updateHeaderVisibility = () => {
+            const currentScrollY = window.scrollY;
+            const menuIsOpen = navPanel.classList.contains('is-open');
+
+            if (menuIsOpen || currentScrollY <= revealThreshold) {
+                siteHeader.classList.remove('site-header--hidden');
+            } else if (currentScrollY > lastScrollY + delta) {
+                siteHeader.classList.add('site-header--hidden');
+            } else if (currentScrollY < lastScrollY - delta) {
+                siteHeader.classList.remove('site-header--hidden');
+            }
+
+            lastScrollY = currentScrollY;
+            ticking = false;
+        };
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateHeaderVisibility);
+                ticking = true;
+            }
+        }, { passive: true });
+    }
 });

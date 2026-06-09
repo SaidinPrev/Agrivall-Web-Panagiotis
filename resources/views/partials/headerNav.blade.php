@@ -2,7 +2,7 @@
     @php
         $cartLineCount = count(session('cart', []));
     @endphp
-    <nav class="site-nav" aria-label="Navegación principal">
+    <nav class="site-nav" aria-label="{{ __('site.nav.main_navigation') }}">
         <div class="site-nav__inner">
             <a class="site-nav__brand" href="{{ route('home') }}">
                 <img src="{{ asset('imgs/logo.png') }}" alt="Agrivall logo">
@@ -36,13 +36,13 @@
                             <span
                                 class="site-nav__cart-count{{ $cartLineCount === 0 ? ' is-empty' : '' }}"
                                 data-cart-count>{{ $cartLineCount }}</span>
-                            <span class="visually-hidden">Abrir carrito</span>
+                            <span class="visually-hidden">{{ __('site.nav.open_cart') }}</span>
                         </button>
                         <div class="site-nav__cart-dropdown" id="site-nav-cart-menu" data-cart-dropdown>
                             <div class="site-nav__cart-summary" data-cart-summary>
-                                <p>Tu carrito está vacío.</p>
+                                <p>{{ __('site.header_cart.empty') }}</p>
                             </div>
-                            <a class="site-nav__cart-link" href="{{ route('shop.index') }}">Ver tu carrito</a>
+                            <a class="site-nav__cart-link" href="{{ route('shop.index') }}">{{ __('site.header_cart.view_cart') }}</a>
                         </div>
                     </li>
                     <li class="site-nav__item site-nav__item--dropdown">
@@ -52,13 +52,15 @@
                         </button>
                         <ul class="site-nav__dropdown" id="site-nav-language-menu">
                             <li>
-                                <a class="site-nav__dropdown-link" href="{{ route('locale.switch', 'es') }}"
+                                <a class="site-nav__dropdown-link"
+                                    href="{{ route('locale.switch', ['locale' => 'es', 'redirect' => request()->fullUrl()]) }}"
                                     @if (app()->getLocale() === 'es') aria-current="true" @endif>
                                     {{ __('site.locale.spanish') }}
                                 </a>
                             </li>
                             <li>
-                                <a class="site-nav__dropdown-link" href="{{ route('locale.switch', 'ca') }}"
+                                <a class="site-nav__dropdown-link"
+                                    href="{{ route('locale.switch', ['locale' => 'ca', 'redirect' => request()->fullUrl()]) }}"
                                     @if (app()->getLocale() === 'ca') aria-current="true" @endif>
                                     {{ __('site.locale.valencian') }}
                                 </a>

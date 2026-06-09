@@ -166,6 +166,14 @@ header {
   width: 100%;
   z-index: 20;
   background: transparent;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  will-change: transform, opacity;
+}
+
+header.site-header--hidden {
+  transform: translateY(calc(-100% - 0.75rem));
+  opacity: 0;
+  pointer-events: none;
 }
 
 .site-nav {
