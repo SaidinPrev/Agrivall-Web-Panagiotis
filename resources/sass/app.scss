@@ -167,6 +167,7 @@ header {
   z-index: 20;
   background: transparent;
   transition: transform 0.35s ease, opacity 0.35s ease;
+  will-change: transform, opacity;
 }
 
 header.site-header--hidden {
@@ -197,8 +198,7 @@ header.site-header--hidden {
     background: $color-cream-glass;
     width: $mobile-drawer-width;
     box-sizing: border-box;
-    height: 100dvh;
-    min-height: 100vh;
+    height: 100%;
     z-index: 9999;
     padding: 25px;
     transform: translateX(-100%);
@@ -476,8 +476,7 @@ header.site-header--hidden {
     position: fixed;
     background: $color-green-overlay;
     width: 100vw;
-    height: 100dvh;
-    min-height: 100vh;
+    height: 100vh;
     top: 0;
     left: 0;
     z-index: 2;
@@ -488,6 +487,24 @@ header.site-header--hidden {
 
   .nav-overlay.active {
     transform: translateX(0);
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  header {
+    will-change: auto;
+  }
+
+  .site-nav {
+    .site-nav__panel {
+      height: 100dvh;
+      min-height: 100vh;
+    }
+
+    .nav-overlay {
+      height: 100dvh;
+      min-height: 100vh;
+    }
   }
 }
 
