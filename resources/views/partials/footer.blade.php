@@ -22,6 +22,13 @@
                 <a href="{{ route('home') }}#blog">{{ __('site.footer.blog') }}</a>
                 <a href="{{ route('home') }}#contacto">{{ __('site.footer.contact') }}</a>
             </div>
+
+            <div class="site-footer__column">
+                <h3>{{ __('legal.links.heading') }}</h3>
+                <a href="{{ route('legal.privacy') }}">{{ __('legal.links.privacy') }}</a>
+                <a href="{{ route('legal.cookies') }}">{{ __('legal.links.cookies') }}</a>
+                <a href="{{ route('legal.notice') }}">{{ __('legal.links.legal_notice') }}</a>
+            </div>
         </div>
     </div>
 

@@ -39,6 +39,18 @@ Route::get('/idioma/{locale}', function (Request $request, string $locale): Redi
 })->name('locale.switch');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/politica-privacidad', fn() => view('legal.page', [
+    'page' => 'privacy',
+    'metaTitle' => __('legal.meta.privacy_title'),
+]))->name('legal.privacy');
+Route::get('/politica-cookies', fn() => view('legal.page', [
+    'page' => 'cookies',
+    'metaTitle' => __('legal.meta.cookies_title'),
+]))->name('legal.cookies');
+Route::get('/aviso-legal', fn() => view('legal.page', [
+    'page' => 'legal_notice',
+    'metaTitle' => __('legal.meta.legal_notice_title'),
+]))->name('legal.notice');
 Route::get('/comprar', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/cart', [CartApiController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartApiController::class, 'store'])->name('cart.store');
