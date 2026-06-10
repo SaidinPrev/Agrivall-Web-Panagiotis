@@ -5,6 +5,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CartApiController;
+use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CasillaController;
 use App\Http\Controllers\HomeController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Admin\PedidoController as AdminPedidoController;
 use App\Http\Controllers\Admin\PostBlogController as AdminPostBlogController;
 use App\Http\Controllers\Admin\SemanaCasillaController as AdminSemanaCasillaController;
 use App\Http\Controllers\Admin\TipoPostController as AdminTipoPostController;
+use App\Http\Middleware\AdminAuthenticated;
 
 Route::get('/idioma/{locale}', function (Request $request, string $locale): RedirectResponse {
     abort_unless(in_array($locale, ['es', 'ca'], true), 404);
@@ -65,13 +67,19 @@ Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
 //Admin
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/pedidos', [AdminPedidoController::class, 'index'])->name('pedidos.index');
-    Route::get('/pedidos/{pedido}', [AdminPedidoController::class, 'show'])->name('pedidos.show');
-    Route::patch('/pedidos/{pedido}/estado', [AdminPedidoController::class, 'updateEstado'])->name('pedidos.update-estado');
-    Route::delete('/pedidos/{pedido}', [AdminPedidoController::class, 'destroy'])->name('pedidos.destroy');
-    Route::get('/semanas-casilla', [AdminSemanaCasillaController::class, 'index'])->name('semanas-casilla.index');
-    Route::get('/semanas-casilla/{semana}/edit', [AdminSemanaCasillaController::class, 'edit'])->name('semanas-casilla.edit');
-    Route::put('/semanas-casilla/{semana}', [AdminSemanaCasillaController::class, 'update'])->name('semanas-casilla.update');
-    Route::resource('tipo-posts', AdminTipoPostController::class)->parameters(['tipo-posts' => 'tipoPost'])->except(['show']);
-    Route::resource('posts-blog', AdminPostBlogController::class)->parameters(['posts-blog' => 'post'])->except(['show']);
+    Route::get('/login', [AdminAuthController::class, 'create'])->name('login');
+    Route::post('/login', [AdminAuthController::class, 'store'])->name('login.store');
+    Route::post('/logout', [AdminAuthController::class, 'destroy'])->name('logout');
+
+    Route::middleware(AdminAuthenticated::class)->group(function () {
+        Route::get('/pedidos', [AdminPedidoController::class, 'index'])->name('pedidos.index');
+        Route::get('/pedidos/{pedido}', [AdminPedidoController::class, 'show'])->name('pedidos.show');
+        Route::patch('/pedidos/{pedido}/estado', [AdminPedidoController::class, 'updateEstado'])->name('pedidos.update-estado');
+        Route::delete('/pedidos/{pedido}', [AdminPedidoController::class, 'destroy'])->name('pedidos.destroy');
+        Route::get('/semanas-casilla', [AdminSemanaCasillaController::class, 'index'])->name('semanas-casilla.index');
+        Route::get('/semanas-casilla/{semana}/edit', [AdminSemanaCasillaController::class, 'edit'])->name('semanas-casilla.edit');
+        Route::put('/semanas-casilla/{semana}', [AdminSemanaCasillaController::class, 'update'])->name('semanas-casilla.update');
+        Route::resource('tipo-posts', AdminTipoPostController::class)->parameters(['tipo-posts' => 'tipoPost'])->except(['show']);
+        Route::resource('posts-blog', AdminPostBlogController::class)->parameters(['posts-blog' => 'post'])->except(['show']);
+    });
 });
