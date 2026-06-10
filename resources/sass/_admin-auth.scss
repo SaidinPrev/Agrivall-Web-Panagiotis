@@ -1,0 +1,83 @@
+.admin-login-page {
+  padding: 10rem 0 5rem;
+
+  .admin-login-page__intro {
+    max-width: 36rem;
+    margin: 0 auto 1.5rem;
+    text-align: center;
+
+    h1 {
+      margin-bottom: 0.85rem;
+      color: $color-burgundy;
+    }
+
+    p {
+      margin: 0;
+      color: rgba($color-burgundy, 0.82);
+    }
+  }
+
+  .admin-login-card {
+    width: min(100%, 30rem);
+    margin: 0 auto;
+    padding: 1.7rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 251, 246, 0.92);
+    box-shadow: 0 1.5rem 3rem rgba($color-burgundy, 0.12);
+  }
+
+  .admin-login-alert {
+    margin: 0 0 1rem;
+    padding: 0.85rem 1rem;
+    border-radius: 1rem;
+    background: rgba($color-burgundy, 0.08);
+    color: $color-burgundy;
+    font-weight: 600;
+  }
+
+  .admin-login-errors {
+    margin: 0 0 1rem;
+    padding-left: 1.2rem;
+    color: $color-burgundy;
+  }
+
+  .admin-login-form {
+    display: grid;
+    gap: 1rem;
+
+    label {
+      display: grid;
+      gap: 0.45rem;
+      color: $color-burgundy;
+      font-weight: 700;
+      justify-items: start;
+    }
+
+    input {
+      width: min(100%, 22rem);
+      padding: 0.72rem 0.9rem;
+      border: 1px solid rgba($color-burgundy, 0.14);
+      border-radius: 1rem;
+      background: $color-white;
+      color: $color-burgundy;
+      font: inherit;
+    }
+
+    button {
+      justify-self: start;
+      padding: 0.85rem 1.3rem;
+      border: 0;
+      border-radius: $radius-pill;
+      background: $color-green;
+      color: $color-cream;
+      cursor: pointer;
+      transition: opacity $transition-base, transform $transition-base;
+
+      &:hover,
+      &:focus-visible {
+        opacity: 0.84;
+        transform: translateY(-2px);
+      }
+    }
+  }
+}

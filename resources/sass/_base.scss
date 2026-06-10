@@ -1,0 +1,167 @@
+html {
+  font-size: $font-size-root-mobile;
+  background-color: $color-green-soft;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $color-green-soft;
+  margin: 0;
+  font-family: $font-family-sans-serif;
+}
+
+h2 {
+  font-size: $font-size-section-title;
+  line-height: 1.15;
+}
+
+h3 {
+  font-size: $font-size-subsection-title;
+  line-height: 1.2;
+}
+
+p {
+  font-size: $font-size-body-lg;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+.section-shell,
+.site-nav__inner {
+  width: min(1200px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.hero-btn,
+.product-card__link,
+section#casilla .casilla-overlay a,
+.blog__link,
+.site-footer__cta,
+section#contacto .contact-form input[type='submit'] {
+  opacity: 1;
+  transition: opacity $transition-base, transform $transition-base, box-shadow $transition-base;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 0.82;
+  }
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 5rem;
+  right: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-green;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  text-decoration: none;
+  transition: 0.2s ease-out;
+  z-index: 15;
+  height: auto;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition:
+    opacity 0.2s ease-out,
+    transform 0.2s ease-out,
+    background-color 0.2s ease-out,
+    visibility 0.2s ease-out;
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  i {
+    color: $color-cream;
+    font-size: 3rem;
+    transition: 0.2s ease-out;
+    z-index: 15;
+  }
+
+  &:hover {
+    background-color: $color-burgundy;
+  }
+
+  &:hover i {
+    transform: translateY(-4px);
+  }
+}
+
+.flash-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.45);
+
+  .flash-modal__card {
+    width: min(100%, 28rem);
+    padding: 2rem;
+    border-radius: 1.25rem;
+    background: $color-panel-warm;
+    color: $color-burgundy;
+    text-align: center;
+    box-shadow: 0 24px 70px rgba(92, 13, 24, 0.28);
+  }
+
+  button {
+    margin-top: 1rem;
+    padding: 0.8rem 1.3rem;
+    border: 0;
+    border-radius: $radius-pill;
+    background: $color-green;
+    color: $color-cream;
+    cursor: pointer;
+    transition: opacity $transition-base, transform $transition-base;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.85;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: $font-size-root-tablet;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  html {
+    font-size: $font-size-root-desktop;
+  }
+}
