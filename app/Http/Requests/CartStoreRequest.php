@@ -22,7 +22,8 @@ class CartStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'items' => ['required', 'array'],
+            // The cart can legitimately become empty when the last line is removed.
+            'items' => ['present', 'array'],
             'items.*.producto_id' => ['required', 'integer', 'exists:productos,id'],
             'items.*.cantidad' => ['required', 'integer', 'min:1'],
         ];
