@@ -33,6 +33,19 @@ section#shop-page {
         text-transform: uppercase;
     }
 
+    .shop-page__alert {
+        width: fit-content;
+        margin-bottom: 1.25rem;
+        padding: 0.85rem 1rem;
+        border-radius: 1rem;
+        font-weight: 800;
+
+        &.is-error {
+            background: rgba($color-burgundy, 0.12);
+            color: $color-burgundy;
+        }
+    }
+
     .shop-page__layout {
         display: grid;
         gap: 1.5rem;

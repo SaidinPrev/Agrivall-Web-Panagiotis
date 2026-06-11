@@ -231,5 +231,6 @@ return [
         'week_request_sent' => 'La teua sol·licitud de reserva s’ha enviat correctament.',
         'order_registered' => 'La teua comanda s’ha registrat correctament.',
         'herb_inquiry_sent' => 'La teua consulta sobre herbes comestibles s’ha enviat correctament.',
+        'form_temporarily_unavailable' => 'No hem pogut enviar la teua sol·licitud en este moment. Torna-ho a intentar en uns minuts.',
     ],
 ];
