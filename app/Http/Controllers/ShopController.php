@@ -9,8 +9,10 @@ use App\Models\LineaPedido;
 use App\Models\Pedido;
 use App\Models\Producto;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewOrderAdminMail;
+use Throwable;
 
 class ShopController extends Controller
 {
@@ -21,62 +23,29 @@ class ShopController extends Controller
 
     public function checkout()
     {
-        $cart = session('cart', []);
+        $cartSummary = $this->cartSummary();
 
-        if (empty($cart)) {
+        if ($cartSummary['items']->isEmpty()) {
             return redirect()->route('shop.index');
         }
 
-        $productIds = array_column($cart, 'producto_id');
-        $products = Producto::query()
-            ->whereIn('id', $productIds)
-            ->get()
-            ->keyBy('id');
-
-        $cartLines = collect($cart)->map(function ($item) use ($products) {
-            $product = $products->get($item['producto_id']);
-            $quantity = $item['cantidad'];
-
-            return [
-                'producto' => $product,
-                'cantidad' => $quantity,
-                'subtotal' => $product->precio * $quantity,
-            ];
-        });
-        $total = $cartLines->sum('subtotal');
-
         return view('checkout.index', [
-            'cartLines' => $cartLines,
-            'total' => $total,
+            'cartLines' => $cartSummary['items'],
+            'total' => $cartSummary['total'],
         ]);
     }
 
     public function storeCheckout(CheckoutRequest $request)
     {
-        $cart = session('cart', []);
+        $cartSummary = $this->cartSummary();
 
-        if (empty($cart)) {
+        if ($cartSummary['items']->isEmpty()) {
             return redirect()->route('shop.index');
         }
 
         $data = $request->validated();
-        $productIds = array_column($cart, 'producto_id');
-        $products = Producto::query()
-            ->whereIn('id', $productIds)
-            ->get()
-            ->keyBy('id');
-
-        $cartLines = collect($cart)->map(function ($item) use ($products) {
-            $product = $products->get($item['producto_id']);
-            $quantity = $item['cantidad'];
-
-            return [
-                'producto' => $product,
-                'cantidad' => $quantity,
-                'subtotal' => $product->precio * $quantity,
-            ];
-        });
-        $total = $cartLines->sum('subtotal');
+        $cartLines = $cartSummary['items'];
+        $total = $cartSummary['total'];
 
         $pedido = DB::transaction(function () use ($data, $cartLines, $total) {
             $pedido = Pedido::create([
@@ -103,7 +72,15 @@ class ShopController extends Controller
         });
 
         $pedido->load('lineas.producto');
-        Mail::to(config('mail.admin.address'))->send(new NewOrderAdminMail($pedido));
+
+        try {
+            Mail::to(config('mail.admin.address'))->send(new NewOrderAdminMail($pedido));
+        } catch (Throwable $exception) {
+            Log::error('Failed to send new order admin email.', [
+                'pedido_id' => $pedido->id,
+                'message' => $exception->getMessage(),
+            ]);
+        }
 
         session()->forget('cart');
 
@@ -116,10 +93,66 @@ class ShopController extends Controller
     {
         $data = $request->validated();
 
-        Mail::to(config('mail.admin.address'))->send(new HerbInquiryAdminMail($data));
+        try {
+            Mail::to(config('mail.admin.address'))->send(new HerbInquiryAdminMail($data));
+        } catch (Throwable $exception) {
+            Log::error('Failed to send herb inquiry admin email.', [
+                'email' => $data['email'],
+                'message' => $exception->getMessage(),
+            ]);
+
+            return redirect()
+                ->route('shop.index', ['producto' => 'hierbas'])
+                ->with('inquiry_error', __('site.status.form_temporarily_unavailable'));
+        }
 
         return redirect()
             ->route('shop.index', ['producto' => 'hierbas'])
             ->with('inquiry_success', __('site.status.herb_inquiry_sent'));
+    }
+
+    private function cartSummary(): array
+    {
+        $cart = session('cart', []);
+        $productIds = array_column($cart, 'producto_id');
+
+        $products = Producto::query()
+            ->whereIn('id', $productIds)
+            ->get()
+            ->keyBy('id');
+
+        $items = collect($cart)
+            ->map(function (array $item) use ($products) {
+                $product = $products->get($item['producto_id']);
+
+                if (!$product) {
+                    return null;
+                }
+
+                $quantity = (int) $item['cantidad'];
+
+                return [
+                    'producto' => $product,
+                    'cantidad' => $quantity,
+                    'subtotal' => $product->precio * $quantity,
+                ];
+            })
+            ->filter()
+            ->values();
+
+        // Keep only valid product lines in the persisted session cart.
+        session([
+            'cart' => $items->map(function (array $item) {
+                return [
+                    'producto_id' => $item['producto']->id,
+                    'cantidad' => $item['cantidad'],
+                ];
+            })->all(),
+        ]);
+
+        return [
+            'items' => $items,
+            'total' => $items->sum('subtotal'),
+        ];
     }
 }
