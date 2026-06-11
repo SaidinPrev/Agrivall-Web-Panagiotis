@@ -11,6 +11,10 @@
                 <p>{{ __('site.shop.description') }}</p>
             </div>
 
+            @if (session('inquiry_error'))
+                <div class="shop-page__alert is-error">{{ session('inquiry_error') }}</div>
+            @endif
+
             <div class="shop-page__layout">
                 <section class="shop-page__catalog" aria-label="{{ __('site.shop.catalog_aria') }}">
                     <div id="shop-products-root">

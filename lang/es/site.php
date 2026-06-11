@@ -231,5 +231,6 @@ return [
         'week_request_sent' => 'Tu solicitud de reserva se ha enviado correctamente.',
         'order_registered' => 'Tu pedido ha sido registrado correctamente.',
         'herb_inquiry_sent' => 'Tu consulta sobre hierbas comestibles ha sido enviada correctamente.',
+        'form_temporarily_unavailable' => 'No hemos podido enviar tu solicitud en este momento. Inténtalo de nuevo en unos minutos.',
     ],
 ];

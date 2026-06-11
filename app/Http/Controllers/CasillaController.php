@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CasillaReservaRequest;
 use App\Mail\CasillaReservaAdminMail;
 use App\Models\SemanaCasilla;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class CasillaController extends Controller
 {
@@ -34,7 +36,21 @@ class CasillaController extends Controller
 
         $semana->update(['estado' => 'PRE-RESERVA']);
 
-        Mail::to(config('mail.admin.address'))->send(new CasillaReservaAdminMail($data, $semana));
+        try {
+            Mail::to(config('mail.admin.address'))->send(new CasillaReservaAdminMail($data, $semana));
+        } catch (Throwable $exception) {
+            $semana->update(['estado' => 'DISPONIBLE']);
+
+            Log::error('Failed to send casilla reservation admin email.', [
+                'semana_casilla_id' => $semana->id,
+                'email' => $data['email'],
+                'message' => $exception->getMessage(),
+            ]);
+
+            return redirect()
+                ->route('casilla.index')
+                ->with('casilla_error', __('site.status.form_temporarily_unavailable'));
+        }
 
         return redirect()
             ->route('casilla.index')
